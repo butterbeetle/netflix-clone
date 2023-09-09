@@ -45,9 +45,10 @@ export default function AuthPage() {
       });
       login();
     } catch (error) {
-      console.log("Register", error);
+      console.log("Register Error", error);
     }
   }, [email, name, password, login]);
+
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover select-none">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
