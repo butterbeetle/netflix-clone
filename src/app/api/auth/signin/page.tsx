@@ -6,6 +6,8 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import GoogleIcon from "@/components/ui/icons/GoogleIcon";
+import GithubIcon from "@/components/ui/icons/GithubIcon";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -56,7 +58,7 @@ export default function AuthPage() {
           <Image src="/images/logo.png" alt="Logo" width={150} height={150} />
         </nav>
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+          <div className="bg-black bg-opacity-70 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign in" : "Register"}
             </h2>
@@ -90,6 +92,27 @@ export default function AuthPage() {
             >
               {variant === "login" ? "Login" : "Sign up"}
             </button>
+            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+              <div
+                className="
+                w-10
+                h-10
+                bg-white 
+                rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+              >
+                <GoogleIcon size={30} />
+              </div>
+              <div
+                onClick={() => signIn("github", { callbackUrl: "/" })}
+                className="
+                w-10
+                h-10
+                bg-white 
+                rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+              >
+                <GithubIcon size={30} />
+              </div>
+            </div>
             <p className="text-neutral-500 mt-12 text-sm text-center ">
               {variant === "login"
                 ? "First time using Netflix?"
