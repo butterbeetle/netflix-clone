@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../lib/prismadb";
 import { createUser, getUserByEmail } from "@/service/user";
 
 export async function POST(req: NextRequest) {

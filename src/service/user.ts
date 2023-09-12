@@ -4,13 +4,15 @@ import { prisma } from "../lib/prismadb";
 interface User {
   email: string;
   name: string;
-  password: string;
+  password?: string;
 }
 export async function createUser({ email, name, password }: User) {
-  const hashedPassword = await bcrypt.hash(password, 12);
+  const hashedPassword = password ? await bcrypt.hash(password, 12) : null;
 
-  return await prisma.user.create({
-    data: {
+  return await prisma.user.upsert({
+    where: { email },
+    update: {},
+    create: {
       email,
       name,
       hashedPassword,

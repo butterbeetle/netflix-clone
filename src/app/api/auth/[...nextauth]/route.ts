@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,6 +8,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../../lib/prismadb";
 import { compare } from "bcrypt";
+import { createUser } from "@/service/user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -60,6 +62,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // console.log("SIGNIN@@@@@@@@@@@@@@@@@@@@@@@", user);
+      // if (account?.type === "oauth") {
+      //   if (!profile?.email || !profile?.name) return false;
+      //   createUser({
+      //     email: profile?.email,
+      //     name: profile?.name,
+      //   });
+      // }
+      return true;
+    },
+    async session({ session }) {
+      // console.log("SESSION@@@@@@@@@@@@@@@@@@@@@@@@", session);
+      return session;
+    },
     async redirect({ url, baseUrl }) {
       if (url.startsWith("/")) return `${baseUrl}${url}`;
       else if (new URL(url).origin === baseUrl) return url;
