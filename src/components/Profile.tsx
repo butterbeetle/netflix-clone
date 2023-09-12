@@ -1,9 +1,7 @@
 "use client";
 
-import UseCurrentUser from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import useSWR from "swr";
 
 interface Props {
   name: string | null | undefined;
