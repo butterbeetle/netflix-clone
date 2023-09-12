@@ -5,13 +5,10 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import GoogleIcon from "@/components/ui/icons/GoogleIcon";
 import GithubIcon from "@/components/ui/icons/GithubIcon";
 
 export default function AuthPage() {
-  const router = useRouter();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,14 +26,12 @@ export default function AuthPage() {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
-      router.push("/");
     } catch (error) {
       console.log("Login Error", error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -52,13 +47,16 @@ export default function AuthPage() {
   }, [email, name, password, login]);
 
   return (
-    <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover select-none">
+    <div
+      className="relative h-full w-full bg-[url('/images/hero.jpg')] 
+    bg-no-repeat bg-center bg-fixed bg-cover select-none"
+    >
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         <nav className="px-12 py-5">
           <Image src="/images/logo.png" alt="Logo" width={150} height={150} />
         </nav>
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-70 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+          <div className="bg-black/70 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign in" : "Register"}
             </h2>
@@ -94,7 +92,7 @@ export default function AuthPage() {
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/profiles" })}
                 className="
                 w-10
                 h-10
@@ -104,7 +102,7 @@ export default function AuthPage() {
                 <GoogleIcon size={30} />
               </div>
               <div
-                onClick={() => signIn("github", { callbackUrl: "/" })}
+                onClick={() => signIn("github", { callbackUrl: "/profiles" })}
                 className="
                 w-10
                 h-10
