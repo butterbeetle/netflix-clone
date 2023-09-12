@@ -15,9 +15,6 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      {/* <h1 className="text-2xl text-green-500">Netflix Clone</h1>
-      <p className="text-white">{`Email:${user.email}, Name:${user.name}`}</p>
-      <Logout /> */}
     </>
   );
 }

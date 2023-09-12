@@ -3,20 +3,46 @@ import Image from "next/image";
 import NavbarItem from "./NavbarItem";
 import ChevronDownIcon from "./ui/icons/ChevronDownIcon";
 import MobileMenu from "./MobileMenu";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SearchIcon from "./ui/icons/SearchIcon";
 import BellIcon from "./ui/icons/BellIcon";
+import AccountMenu from "./AccountMenu";
+
+const TOP_OFFSET = 66;
 
 export default function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= TOP_OFFSET) {
+        setShowBackground(true);
+      } else {
+        setShowBackground(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((cur) => !cur);
   }, []);
-
+  const toggleAccountMenu = useCallback(() => {
+    setShowAccountMenu((cur) => !cur);
+  }, []);
   return (
     <nav className="w-full fixed z-40 select-none">
-      <div className="px-4 lg:px-16 py-6 flex flex-row items-center transition duration-500 bg-zinc-900/90 ">
+      <div
+        className={`${
+          showBackground ? "bg-zinc-900/90" : ""
+        } px-4 lg:px-16 py-6 flex flex-row items-center transition duration-500`}
+      >
         <Image
           className="h-4 lg:h-7"
           src="/images/logo.png"
@@ -37,7 +63,11 @@ export default function Navbar() {
           className="flex flex-row items-center gap-2 ml-8 cursor-pointer relative lg:hidden "
         >
           <p className="text-white text-sm">Browse</p>
-          <ChevronDownIcon className="text-white transition" />
+          <ChevronDownIcon
+            className={`text-white transition duration-300 ${
+              showMobileMenu ? "rotate-180" : "rotate-0"
+            }`}
+          />
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
@@ -47,7 +77,10 @@ export default function Navbar() {
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BellIcon />
           </div>
-          <div className="flex flex-row items-center gap-2 cursor-pointer relative">
+          <div
+            onClick={toggleAccountMenu}
+            className="flex flex-row items-center gap-2 cursor-pointer relative"
+          >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
               <Image
                 className="object-cover rounded-md"
@@ -57,7 +90,12 @@ export default function Navbar() {
                 height={100}
               />
             </div>
-            <ChevronDownIcon className="text-white transition" />
+            <ChevronDownIcon
+              className={`text-white transition duration-300 ${
+                showAccountMenu ? "rotate-180" : "rotate-0"
+              }`}
+            />
+            <AccountMenu visible={showAccountMenu} />
           </div>
         </div>
       </div>
