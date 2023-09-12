@@ -1,10 +1,13 @@
+import fetcher from "@/lib/fetcher";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import useSWR from "swr";
 
 interface Props {
   visible?: boolean;
 }
 export default function AccountMenu({ visible }: Props) {
+  const { data: user } = useSWR("/api/current", fetcher);
   if (!visible) return null;
 
   return (
@@ -15,11 +18,12 @@ export default function AccountMenu({ visible }: Props) {
             className="object-cover rounded-md w-8"
             src="/images/default-blue.png"
             alt="profile"
+            priority
             width={100}
             height={100}
           />
           <p className="text-white text-sm group-hover/item:underline">
-            Username
+            {user.name}
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />

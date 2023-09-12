@@ -43,13 +43,16 @@ export default function Navbar() {
           showBackground ? "bg-zinc-900/90" : ""
         } px-4 lg:px-16 py-6 flex flex-row items-center transition duration-500`}
       >
-        <Image
-          className="h-4 lg:h-7"
-          src="/images/logo.png"
-          alt="Logo"
-          width={100}
-          height={100}
-        />
+        <div className=" flex items-center w-10  lg:w-20 ">
+          <Image
+            className="object-cover"
+            src="/images/logo.png"
+            alt="Logo"
+            priority
+            width={100}
+            height={100}
+          />
+        </div>
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
@@ -86,6 +89,7 @@ export default function Navbar() {
                 className="object-cover rounded-md"
                 src="/images/default-blue.png"
                 alt="profile"
+                priority
                 width={100}
                 height={100}
               />

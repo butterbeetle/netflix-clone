@@ -34,6 +34,7 @@ export default function Profile({ name }: Props) {
           src={"/images/default-blue.png"}
           alt="Profile"
           sizes="100vw"
+          priority
           width={0}
           height={0}
         />
