@@ -2,6 +2,7 @@ import Logout from "@/components/Logout";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import Navbar from "@/components/Navbar";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -13,9 +14,10 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className="text-2xl text-green-500">Netflix Clone</h1>
+      <Navbar />
+      {/* <h1 className="text-2xl text-green-500">Netflix Clone</h1>
       <p className="text-white">{`Email:${user.email}, Name:${user.name}`}</p>
-      <Logout />
+      <Logout /> */}
     </>
   );
 }
