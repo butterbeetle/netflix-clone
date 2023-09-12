@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import SearchIcon from "./ui/icons/SearchIcon";
 import BellIcon from "./ui/icons/BellIcon";
 import AccountMenu from "./AccountMenu";
+import Link from "next/link";
 
 const TOP_OFFSET = 66;
 
@@ -43,7 +44,7 @@ export default function Navbar() {
           showBackground ? "bg-zinc-900/90" : ""
         } px-4 lg:px-16 py-6 flex flex-row items-center transition duration-500`}
       >
-        <div className=" flex items-center w-10  lg:w-20 ">
+        <Link href={"/"} className=" flex items-center w-10  lg:w-20">
           <Image
             className="object-cover"
             src="/images/logo.png"
@@ -52,7 +53,7 @@ export default function Navbar() {
             width={100}
             height={100}
           />
-        </div>
+        </Link>
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" />
           <NavbarItem label="Series" />
