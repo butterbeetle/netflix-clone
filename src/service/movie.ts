@@ -1,13 +1,21 @@
 import { prisma } from "@/lib/prismadb";
 
-export async function getMovieList() {
+export async function getRandomMovie() {
   const moviesCount = await prisma.movie.count();
   const randomIndex = Math.floor(Math.random() * moviesCount);
 
-  const randomMovies = await prisma.movie.findMany({
+  const randomMovie = await prisma.movie.findMany({
     take: 1,
     skip: randomIndex,
   });
 
-  return randomMovies;
+  console.log("randomMovie", randomMovie);
+
+  return randomMovie[0];
+}
+
+export async function getMovieList() {
+  const movies = await prisma.movie.findMany();
+
+  return movies;
 }

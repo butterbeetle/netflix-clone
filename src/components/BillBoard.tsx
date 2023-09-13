@@ -12,7 +12,6 @@ export default function BillBoard() {
     revalidateOnReconnect: false,
   });
 
-  console.log(data);
   return (
     <div className="relative">
       <div className="relative h-[56.25vw]">
@@ -28,8 +27,8 @@ export default function BillBoard() {
               autoPlay
               muted
               loop
-              poster={data[0]?.thumbnailUrl}
-              src={data[0]?.videoUrl}
+              poster={data?.thumbnailUrl}
+              src={data?.videoUrl}
             />
             <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16 z-10">
               <p
@@ -44,7 +43,7 @@ export default function BillBoard() {
             drop-shadow-xl
             "
               >
-                {data[0]?.title}
+                {data?.title}
               </p>
               <p
                 className="
@@ -59,7 +58,7 @@ export default function BillBoard() {
             drop-shadow-xl
             "
               >
-                {data[0]?.description}
+                {data?.description}
               </p>
               <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
                 <button
