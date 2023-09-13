@@ -1,4 +1,3 @@
-import { signIn } from "next-auth/react";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -8,7 +7,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../../lib/prismadb";
 import { compare } from "bcrypt";
-import { createUser } from "@/service/user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
