@@ -9,8 +9,6 @@ export async function getRandomMovie() {
     skip: randomIndex,
   });
 
-  console.log("randomMovie", randomMovie);
-
   return randomMovie[0];
 }
 

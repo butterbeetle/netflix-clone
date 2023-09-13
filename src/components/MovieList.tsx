@@ -1,4 +1,5 @@
 import { isEmpty } from "lodash";
+import MovieCard from "./MovieCard";
 
 interface Props {
   data: Record<string, any>[];
@@ -17,7 +18,7 @@ export default function MovieList({ data, title }: Props) {
         </p>
         <div className="grid grid-cols-4 gap-2">
           {data.map((movie) => (
-            <div key={movie.id}>movie</div>
+            <MovieCard key={movie.id} data={movie} />
           ))}
         </div>
       </div>
