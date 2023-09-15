@@ -1,12 +1,13 @@
 import { isEmpty } from "lodash";
 import MovieCard from "./MovieCard";
+import { nowplayingMovie } from "@/model/movie";
 
 interface Props {
-  data: Record<string, any>[];
   title: string;
+  movies: nowplayingMovie[] | null;
 }
-export default function MovieList({ data, title }: Props) {
-  if (isEmpty(data)) {
+export default function MovieList({ title, movies }: Props) {
+  if (isEmpty(movies)) {
     return null;
   }
 
@@ -17,7 +18,7 @@ export default function MovieList({ data, title }: Props) {
           {title}
         </p>
         <div className="grid grid-cols-4 gap-2">
-          {data.map((movie) => (
+          {movies?.map((movie) => (
             <MovieCard key={movie.id} data={movie} />
           ))}
         </div>

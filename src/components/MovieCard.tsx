@@ -1,8 +1,10 @@
 import Image from "next/image";
 import PlayIcon from "./ui/icons/PlayIcon";
+import { nowplayingMovie } from "@/model/movie";
+import { tmdbImageURL } from "@/service/tmdb";
 
 interface Props {
-  data: Record<string, any>;
+  data: nowplayingMovie;
 }
 export default function MovieCard({ data }: Props) {
   return (
@@ -11,7 +13,7 @@ export default function MovieCard({ data }: Props) {
         className="object-cover cursor-pointer transition duration shadow-xl rounded-md
         group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full h-[12vw]
         "
-        src={data.thumbnailUrl}
+        src={`${tmdbImageURL}/${data.backdrop_path}`}
         alt="thumbnail"
         width={200}
         height={200}
@@ -30,7 +32,7 @@ export default function MovieCard({ data }: Props) {
           transition duration shadow-xl rounded-t-md 
           w-full h-[12vw]
         "
-          src={data.thumbnailUrl}
+          src={`${tmdbImageURL}/${data.backdrop_path}`}
           alt="thumbnail"
           width={200}
           height={200}
@@ -52,12 +54,9 @@ export default function MovieCard({ data }: Props) {
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
           </p>
-          <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
-          </div>
-          <div className="flex flex-row mt-4 gap-2 items-center">
+          {/* <div className="flex flex-row mt-4 gap-2 items-center">
             <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import fetcher from "@/lib/fetcher";
 import { nowplayingMovie } from "@/model/movie";
 
 export default function MovieSection() {
-  const { data } = useSWR<nowplayingMovie[]>(
+  const { data: movies } = useSWR<nowplayingMovie[]>(
     "/api/movie/now_playing/",
     fetcher,
     {
@@ -16,6 +16,5 @@ export default function MovieSection() {
     }
   );
 
-  console.log(data);
-  return <div>TEST</div>;
+  return <MovieList title={"지금 상영중"} movies={movies ?? null} />;
 }
