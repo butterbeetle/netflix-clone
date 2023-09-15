@@ -4,21 +4,21 @@ import { nowplayingMovie } from "@/model/movie";
 import { tmdbImageURL } from "@/service/tmdb";
 
 interface Props {
-  data: nowplayingMovie;
+  movie: nowplayingMovie;
 }
-export default function MovieCard({ data }: Props) {
+export default function MovieCard({ movie }: Props) {
   return (
-    <div className="group bg-zinc-900 col-span relative h-[12vw]">
+    <div className="group bg-zinc-900 col-span relative mx-1">
       <Image
-        className="object-cover cursor-pointer transition duration shadow-xl rounded-md
-        group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full h-[12vw]
+        className="object-cover cursor-pointer transition duration shadow-md rounded-md
+        group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 w-full 
         "
-        src={`${tmdbImageURL}/${data.backdrop_path}`}
+        src={`${tmdbImageURL}/${movie.backdrop_path}`}
         alt="thumbnail"
-        width={200}
-        height={200}
+        width={300}
+        height={300}
       />
-      <div
+      {/* <div
         className="opacity-0 absolute top-0 transition duration-200 z-10 invisible sm:visible
       delay-300 w-full scale-0 
       group-hover:scale-110 group-hover:-translate-y-[6vw]
@@ -32,7 +32,7 @@ export default function MovieCard({ data }: Props) {
           transition duration shadow-xl rounded-t-md 
           w-full h-[12vw]
         "
-          src={`${tmdbImageURL}/${data.backdrop_path}`}
+          src={`${tmdbImageURL}/${movie.backdrop_path}`}
           alt="thumbnail"
           width={200}
           height={200}
@@ -54,11 +54,11 @@ export default function MovieCard({ data }: Props) {
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
           </p>
-          {/* <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
-          </div> */}
+          <div className="flex flex-row mt-4 gap-2 items-center">
+            <p className="text-white text-[10px] lg:text-sm">{movie.genre}</p>
+          </div>
         </div>
-      </div>
+  </div>*/}
     </div>
   );
 }
