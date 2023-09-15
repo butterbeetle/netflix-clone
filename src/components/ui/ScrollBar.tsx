@@ -2,7 +2,8 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import ChevronLeftIcon from "./icons/ChevronLeftIcon";
+import ChevronRightIcon from "./icons/ChevronRightIcon";
 
 const responsive = {
   desktop: {
@@ -21,20 +22,20 @@ const responsive = {
 const ButtonGroup = ({ next, previous, goToSlide, ...rest }: any) => {
   return (
     <div
-      className="carousel-button-group 
-      flex w-full justify-end items-center md:absolute md:top-[50%] md:translate-y-[-50%] md:justify-between"
+      className="carousel-button-group gap-3 mt-2 md:mt-0
+      flex w-full justify-end  md:absolute md:top-[50%] md:translate-y-[-50%] md:justify-between"
     >
       <button
         className="relative md:left-[-2rem] text-gray-400 hover:text-white transition"
         onClick={() => previous()}
       >
-        <FiChevronLeft size={30} />
+        <ChevronLeftIcon size={20} />
       </button>
       <button
         className="relative md:right-[-2rem]  text-gray-400 hover:text-white transition"
         onClick={() => next()}
       >
-        <FiChevronRight size={30} />
+        <ChevronRightIcon size={20} />
       </button>
     </div>
   );
