@@ -47,8 +47,9 @@ type Props = {
 
 export default function ScrollBar({ children }: Props) {
   return (
-    <div className="relative ">
+    <div className="relative">
       <Carousel
+        className="h-[8vw]"
         responsive={responsive}
         infinite
         arrows={false}

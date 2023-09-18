@@ -16,5 +16,9 @@ export default function MovieSection() {
     }
   );
 
-  return <MovieList title={"지금 상영중"} movies={movies ?? null} />;
+  return (
+    <section className="pb-40">
+      <MovieList title={"지금 상영중"} movies={movies ?? null} />;
+    </section>
+  );
 }

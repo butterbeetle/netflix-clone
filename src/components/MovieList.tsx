@@ -18,11 +18,11 @@ export default function MovieList({ title, movies }: Props) {
         <p className="text-white text-md md:text lg:text-2xl font-semibold mb-2">
           {title}
         </p>
-        <ScrollBar>
+        <div className="relative flex overflow-hidden border-orange-300 border-2 h-[20vh] items-center">
           {movies?.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
-        </ScrollBar>
+        </div>
       </div>
     </div>
   );

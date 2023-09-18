@@ -17,9 +17,7 @@ export default async function Home() {
     <main>
       <Navbar />
       <BillBoard />
-      <div className="pb-40">
-        <MovieSection />
-      </div>
+      <MovieSection />
     </main>
   );
 }
