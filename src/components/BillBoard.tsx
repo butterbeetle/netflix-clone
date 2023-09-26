@@ -66,10 +66,10 @@ export default function BillBoard() {
                 bg-white/30
                 text-white
                 rounded-md
-                py-1 md:py-2
+                py-1
                 px-2 md:px-4
                 w-auto
-                text-xs lg;text-lg
+                text-xs lg:text-lg
                 font-semibold
                 flex
                 flex-row
@@ -79,7 +79,7 @@ export default function BillBoard() {
               "
                 >
                   <InfoCircleIcon className="mr-1" />
-                  More Info
+                  상세 정보
                 </button>
               </div>
             </div>
