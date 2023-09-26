@@ -95,11 +95,6 @@ export default function Navbar() {
                 height={100}
               />
             </div>
-            <ChevronDownIcon
-              className={`text-white transition duration-300 ${
-                showAccountMenu ? "rotate-180" : "rotate-0"
-              }`}
-            />
             <AccountMenu visible={showAccountMenu} />
           </div>
         </div>

@@ -11,9 +11,9 @@ export default function AccountMenu({ visible }: Props) {
   if (!visible) return null;
 
   return (
-    <div className="bg-black w-56 absolute top-14 right-0 py-5 flex flex-col border-2 border-gray-800">
+    <div className="bg-black w-56 absolute top-8 right-[-5px] py-5 flex flex-col border-2 border-gray-800">
       <div className="flex flex-col gap-3">
-        <div className="px-3 group/item flex flex-row gap-3 items-center w-full">
+        <div className="px-2 group/item flex flex-row gap-3 items-center w-full">
           <Image
             className="object-cover rounded-md w-8"
             src="/images/default-blue.png"
@@ -26,12 +26,12 @@ export default function AccountMenu({ visible }: Props) {
             {user.name}
           </p>
         </div>
-        <hr className="bg-gray-600 border-0 h-px my-4" />
+        <hr className="bg-gray-600 border-0 h-px my-2" />
         <div
           onClick={() => signOut()}
           className="px-3 text-center text-white text-sm hover:underline"
         >
-          Sign out of Netflix
+          넷플릭스에서 로그아웃
         </div>
       </div>
     </div>
