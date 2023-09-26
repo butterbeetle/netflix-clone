@@ -8,13 +8,14 @@ interface Props {
 }
 export default function MovieCard({ movie }: Props) {
   return (
-    <div className="group bg-zinc-900 ">
+    <div className="group bg-zinc-900 w-full">
       <Image
-        className="object-cover cursor-pointer transition duration shadow-md rounded-md "
+        className="w-1/3 h-full"
         src={`${tmdbImageURL}/${movie.backdrop_path}`}
         alt="thumbnail"
-        width={300}
-        height={300}
+        priority
+        width={0}
+        height={0}
       />
       {/* <div
         className="opacity-0 absolute top-0 transition duration-200 z-10 invisible sm:visible
