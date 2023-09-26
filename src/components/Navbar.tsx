@@ -85,7 +85,7 @@ export default function Navbar() {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
           >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+            <div className="w-6 h-6 rounded-md overflow-hidden">
               <Image
                 className="object-cover rounded-md"
                 src="/images/default-blue.png"
