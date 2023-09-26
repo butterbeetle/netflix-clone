@@ -54,19 +54,19 @@ export default function Navbar() {
             height={100}
           />
         </Link>
-        <div className="flex-row ml-8 gap-7 hidden lg:flex">
-          <NavbarItem label="Home" />
-          <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
-          <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
-          <NavbarItem label="Browse by languages" />
+        <div className="flex-row ml-12 gap-5 hidden lg:flex text-sm">
+          <NavbarItem label="홈" />
+          <NavbarItem label="시리즈" />
+          <NavbarItem label="영화" />
+          <NavbarItem label="New! 요즘 대세 콘텐츠" />
+          <NavbarItem label="내가 찜한 리스트" />
+          <NavbarItem label="언어별로 찾아보기" />
         </div>
         <div
           onClick={toggleMobileMenu}
           className="flex flex-row items-center gap-2 ml-8 cursor-pointer relative lg:hidden "
         >
-          <p className="text-white text-sm">Browse</p>
+          <p className="text-white text-[0.5rem]">메뉴</p>
           <ChevronDownIcon
             className={`text-white transition duration-300 ${
               showMobileMenu ? "rotate-180" : "rotate-0"

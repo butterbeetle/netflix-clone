@@ -14,7 +14,7 @@ export default function BillBoard() {
 
   return (
     <div className="relative">
-      <div className="relative h-[56.25vw]">
+      <div className="relative h-[50vw]">
         {isLoading && (
           <p className="absolute text-white top-[40%] left-[50%] translate-x-[-50%]">
             <Spinner color={"red"} />
@@ -23,7 +23,7 @@ export default function BillBoard() {
         {!isLoading && (
           <>
             <video
-              className="w-full h-[56.25vw] object-cover brightness-[60%]"
+              className="w-full h-[50vw] object-cover brightness-[60%]"
               autoPlay
               muted
               loop
