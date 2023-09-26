@@ -30,7 +30,7 @@ export default function BillBoard() {
               poster={data?.thumbnailUrl}
               src={data?.videoUrl}
             />
-            <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16 z-10">
+            <div className="absolute top-[20%]  ml-4 md:ml-16 z-10">
               <p
                 className="
             text-white 
@@ -53,7 +53,6 @@ export default function BillBoard() {
             mt-3
             md:mt-8
             w-[90%]
-            md:w-[80%]
             lg:w-[50%]
             drop-shadow-xl
             "
