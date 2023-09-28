@@ -7,6 +7,9 @@ import { tmdbImageURL } from "@/service/tmdb";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,16 +17,23 @@ import "swiper/css/a11y";
 
 interface Props {
   title: string;
-  movies: nowplayingMovie[] | null;
+  category: string;
 }
-export default function MovieList({ title, movies }: Props) {
+export default function MovieList({ title, category }: Props) {
+  const { data: movies } = useSWR<nowplayingMovie[]>(
+    `/api/movie/${category}/`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
   return (
     <>
       {movies ? (
-        <div className="px-6 md:px-12 mt-4">
-          <p className="text-white text-md md:text lg:text-2xl font-semibold mb-2">
-            {title}
-          </p>
+        <div className="px-6 md:px-12 my-4">
+          <p className="text-white text-sm font-semibold mb-2">{title}</p>
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             navigation={true}
