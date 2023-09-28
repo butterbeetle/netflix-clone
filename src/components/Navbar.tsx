@@ -42,7 +42,7 @@ export default function Navbar() {
       <div
         className={`${
           showBackground ? "bg-zinc-900/90" : ""
-        } px-4 lg:px-16 py-6 flex flex-row items-center transition duration-500`}
+        } px-4 lg:px-12 py-1 flex flex-row items-center transition duration-500`}
       >
         <Link href={"/"} className=" flex items-center w-10  lg:w-20">
           <Image

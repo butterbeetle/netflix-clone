@@ -16,31 +16,29 @@ export default function BillBoard() {
 
   return (
     <div className="relative">
-      <div className="relative h-[50vw]">
+      <div className="relative h-[40vw]">
         {isLoading && (
-          <p className="absolute text-white top-[40%] left-[50%] translate-x-[-50%]">
+          <p className="absolute text-white top-[30%] left-[50%] translate-x-[-50%]">
             <Spinner color={"red"} />
           </p>
         )}
         {!isLoading && (
           <div className="relative w-full h-full">
+            <div className="absolute w-full h-full  bg-gradient-to-t from-zinc-900 to-zinc-900/10 z-[1]" />
             <Image
-              className="object-cover bg-gradient-to-b from-zinc-700 "
+              className="object-cover"
               src={`${tmdbImageURL}/${movie.backdrop_path}`}
               alt="thumbnail"
               fill
               sizes="150"
               priority
             />
-            <div className="absolute top-[20%]  ml-4 md:ml-16 z-10">
+            <div className="absolute top-[20%] ml-6 md:ml-12 z-[1]">
               <p
                 className="
             text-white 
-            text-1xl
-            md:text-5xl 
-            h-full 
-            w-[50%] 
-            lg:text-6xl 
+            text-md md:text-2xl lg:text-3xl 
+            h-full w-[50%] 
             font-bold 
             drop-shadow-xl
             "
@@ -50,13 +48,9 @@ export default function BillBoard() {
               <p
                 className="
             text-white
-            text-[8px]
-            md:text-md
-            lg:text-lg
+            text-[10px] md:text-[11px] lg:text-[12px]
             mt-3
-            md:mt-8
-            w-[90%]
-            lg:w-[50%]
+            w-[40%]
             drop-shadow-xl
             "
               >
@@ -68,10 +62,9 @@ export default function BillBoard() {
                 bg-white/30
                 text-white
                 rounded-md
-                py-1
-                px-2 md:px-4
+                py-[2px]
+                px-2
                 w-auto
-                text-xs lg:text-lg
                 font-semibold
                 flex
                 flex-row
@@ -81,7 +74,12 @@ export default function BillBoard() {
               "
                 >
                   <InfoCircleIcon className="mr-1" />
-                  상세 정보
+                  <p
+                    className="
+                text-[10px] md:text-md"
+                  >
+                    상세 정보
+                  </p>
                 </button>
               </div>
             </div>
