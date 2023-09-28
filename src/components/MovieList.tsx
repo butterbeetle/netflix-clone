@@ -6,6 +6,7 @@ import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
+import PlayIcon from "./ui/icons/PlayIcon";
 
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
@@ -36,6 +37,7 @@ export default function MovieList({ title, category }: Props) {
           <p className="text-white text-sm font-semibold mb-2">{title}</p>
           <Swiper
             modules={[Navigation, Pagination, A11y]}
+            loop={true}
             navigation={true}
             pagination={{
               clickable: true,
@@ -50,7 +52,7 @@ export default function MovieList({ title, category }: Props) {
           >
             {movies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <div className="relative w-full h-[17vw]  md:h-[13vw] lg:h-[8vw]">
+                <div className="peer relative w-full h-[17vw]  md:h-[13vw] lg:h-[8vw]">
                   <Image
                     className="object-cover"
                     src={`${tmdbImageURL}/${movie.backdrop_path}`}
@@ -59,6 +61,28 @@ export default function MovieList({ title, category }: Props) {
                     sizes="150"
                   />
                 </div>
+                {/* <div
+                  className="bg-red-500 absolute top-0 transition duration-200 z-10
+      delay-300 w-full
+      peer-hover:scale-125 peer-hover:-translate-y-[2vw]
+      peer-hover:opacity-100
+      "
+                >
+                  <div>
+                    <Image
+                      className="
+          cursor-pointer
+          object-cover
+          transition duration shadow-xl rounded-t-md 
+          w-full h-[12vw]
+        "
+                      src={`${tmdbImageURL}/${movie.backdrop_path}`}
+                      alt="thumbnail"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                </div> */}
               </SwiperSlide>
             ))}
           </Swiper>

@@ -13,3 +13,7 @@ body {
 html {
   @apply h-full;
 }
+
+.swiper {
+  @apply overflow-visible !important;
+}
