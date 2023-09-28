@@ -57,3 +57,22 @@ export async function getUpcomingMovie() {
     .then((res) => res.json()) //
     .then((data) => data.results);
 }
+
+export async function getTrendingMovies() {
+  const url = `${tmdbBaseURL}/trending/movie/day?language=ko-KR`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+    },
+  };
+
+  return await fetch(url, options)
+    .then((res) => res.json()) //
+    .then((data) => data.results)
+    .then((data) => {
+      const index = Math.floor(Math.random() * 20);
+      return data[index];
+    });
+}

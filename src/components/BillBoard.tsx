@@ -4,9 +4,11 @@ import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
 import InfoCircleIcon from "./ui/icons/InfoCircleIcon";
 import Spinner from "./ui/Spinner";
+import Image from "next/image";
+import { tmdbImageURL } from "@/service/tmdb";
 
 export default function BillBoard() {
-  const { data, isLoading } = useSWR("/api/random/", fetcher, {
+  const { data: movie, isLoading } = useSWR(`/api/trending/movies/`, fetcher, {
     revalidateOnFocus: false,
     revalidateIfStale: false,
     revalidateOnReconnect: false,
@@ -21,14 +23,14 @@ export default function BillBoard() {
           </p>
         )}
         {!isLoading && (
-          <>
-            <video
-              className="w-full h-[50vw] object-cover brightness-[60%]"
-              autoPlay
-              muted
-              loop
-              poster={data?.thumbnailUrl}
-              src={data?.videoUrl}
+          <div className="relative w-full h-full">
+            <Image
+              className="object-cover bg-gradient-to-b from-zinc-700 "
+              src={`${tmdbImageURL}/${movie.backdrop_path}`}
+              alt="thumbnail"
+              fill
+              sizes="150"
+              priority
             />
             <div className="absolute top-[20%]  ml-4 md:ml-16 z-10">
               <p
@@ -43,13 +45,14 @@ export default function BillBoard() {
             drop-shadow-xl
             "
               >
-                {data?.title}
+                {movie?.title}
               </p>
               <p
                 className="
             text-white
             text-[8px]
-            md:text-lg
+            md:text-md
+            lg:text-lg
             mt-3
             md:mt-8
             w-[90%]
@@ -57,7 +60,7 @@ export default function BillBoard() {
             drop-shadow-xl
             "
               >
-                {data?.description}
+                {movie?.overview}
               </p>
               <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
                 <button
@@ -82,7 +85,7 @@ export default function BillBoard() {
                 </button>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -50,13 +50,13 @@ export default function MovieList({ title, category }: Props) {
           >
             {movies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <div className="w-1/3 h-[17vw] md:w-1/4 md:h-[13vw] lg:w-1/5 lg:h-[8vw]">
+                <div className="relative w-full h-[17vw]  md:h-[13vw] lg:h-[8vw]">
                   <Image
                     className="object-cover"
                     src={`${tmdbImageURL}/${movie.backdrop_path}`}
                     alt="thumbnail"
                     fill
-                    priority
+                    sizes="150"
                   />
                 </div>
               </SwiperSlide>
