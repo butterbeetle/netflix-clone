@@ -35,7 +35,7 @@ export default function MovieList({ title, type, category, genres }: Props) {
   return (
     <>
       {movies ? (
-        <div className="px-6 md:px-12 my-4">
+        <div className="px-6 md:px-12 mt-4 mb-8">
           <p className="text-[#E5E5E5] text-[12px] font-semibold mb-2">
             {title}
           </p>
@@ -47,11 +47,13 @@ export default function MovieList({ title, type, category, genres }: Props) {
               clickable: true,
             }}
             slidesPerView={3}
+            slidesPerGroup={3}
+            speed={1000}
             spaceBetween={0}
             breakpoints={{
-              800: { slidesPerView: 4, spaceBetween: 5 },
-              1100: { slidesPerView: 5, spaceBetween: 5 },
-              1400: { slidesPerView: 6, spaceBetween: 5 },
+              800: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 5 },
+              1100: { slidesPerView: 5, slidesPerGroup: 5, spaceBetween: 5 },
+              1400: { slidesPerView: 6, slidesPerGroup: 6, spaceBetween: 5 },
             }}
           >
             {movies.map((movie) => (
