@@ -39,7 +39,7 @@ export default function Footer() {
         ))}
       </ul>
       <div className="mb-[20px]">
-        <p className="text-sm border-2 border-[#808080] w-fit text-[#808080] hover:text-white transition p-1">
+        <p className="text-sm border-2 border-[#808080] w-fit text-[#808080] hover:text-white transition p-1 cursor-pointer">
           서비스 코드
         </p>
       </div>
