@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Navbar from "@/components/Navbar";
-import BillBoard from "@/components/BillBoard";
+import Banner from "@/components/Banner";
 import MovieSection from "@/components/MovieSection";
 import Footer from "@/components/Footer";
 
@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <main>
       <Navbar />
-      <BillBoard />
+      <Banner />
       <MovieSection />
       <Footer />
     </main>
