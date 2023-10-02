@@ -21,7 +21,7 @@ const footerMenu = [
 
 export default function Footer() {
   return (
-    <div className="mx-auto max-w-[980px] px-[4%]">
+    <div className="mx-auto max-w-[980px] px-[4%] pb-8 ">
       <div className="text-white flex gap-8 mt-[70px] mb-6 ">
         <FacebookIcon size={25} className={"cursor-pointer"} />
         <InstagramIcon size={25} className={"cursor-pointer"} />
@@ -43,7 +43,7 @@ export default function Footer() {
           서비스 코드
         </p>
       </div>
-      <div className="text-[11px] text-[#808080] mb-8 leading-2">
+      <div className="text-[11px] text-[#808080] leading-2">
         <div>
           넷플릭스서비시스코리아 유한회사
           통신판매업신고번호:제2018-서울종로-0426호

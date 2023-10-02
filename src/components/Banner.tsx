@@ -44,12 +44,12 @@ export default function Banner() {
             sizes="150"
             priority
           />
-          <div className="absolute top-[20%] ml-6 md:ml-12 z-[1]">
+          <div className="absolute bottom-[15vw] lg:bottom-[20vw] ml-6 md:ml-12 z-[1]">
             <p
               className="
             text-white 
-            text-md md:text-2xl lg:text-3xl 
-            h-full w-[50%] 
+            text-base md:text-6xl 
+            h-full w-[50%] lg:w-[70%]
             font-bold 
             drop-shadow-xl
             "
@@ -59,36 +59,39 @@ export default function Banner() {
             <p
               className="
             text-white
-            text-[10px] md:text-[11px] lg:text-[12px]
+            text-base lg:text-2xl
             mt-3
-            w-[40%]
+            w-[50%] 
             drop-shadow-xl
-            line-clamp-3
+            line-clamp-3 lg:line-clamp-5
             "
             >
               {bannerData?.overview}
             </p>
-            <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
+            <div
+              className="flex flex-row items-center mt-3 md:mt-4 gap-3 
+                "
+            >
               <button
                 className="
                 bg-white/30
+                hover:bg-red
                 text-white
                 rounded-md
-                py-[2px]
                 px-2
+                py-1
                 w-auto
                 font-semibold
                 flex
                 flex-row
                 items-center
-                hover:bg-opacity-20
                 transition
               "
               >
-                <InfoCircleIcon className="mr-1" />
+                <InfoCircleIcon className="mr-2" />
                 <p
                   className="
-                text-[10px] md:text-md"
+                text-base"
                 >
                   상세 정보
                 </p>

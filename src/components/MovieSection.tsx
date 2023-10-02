@@ -18,7 +18,7 @@ const movieList = [
 
 export default function MovieSection() {
   return (
-    <section className="relative w-full h-full z-[2] top-[-12px]">
+    <section className="relative w-full h-full z-[2] -top-[12.5vw]">
       {movieList.map(({ title, type, category, genres }) => (
         <MovieList
           key={title}
