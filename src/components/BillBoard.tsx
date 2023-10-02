@@ -24,7 +24,7 @@ export default function BillBoard() {
         )}
         {!isLoading && (
           <div className="relative w-full h-full">
-            <div className="absolute w-full h-full  bg-gradient-to-t from-zinc-900 to-zinc-900/10 z-[1]" />
+            <div className="absolute w-full h-full  bg-gradient-to-t from-[#141414] to-[#141414]/10 z-[1]" />
             <Image
               className="object-cover"
               src={`${tmdbImageURL}/${movie.backdrop_path}`}
@@ -52,6 +52,7 @@ export default function BillBoard() {
             mt-3
             w-[40%]
             drop-shadow-xl
+            line-clamp-3
             "
               >
                 {movie?.overview}
