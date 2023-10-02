@@ -1,20 +1,13 @@
-import { prisma } from "@/lib/prismadb";
 import { tmdbBaseURL } from "./tmdb";
 
-export async function getRandomMovie() {
-  const moviesCount = await prisma.movie.count();
-  const randomIndex = Math.floor(Math.random() * moviesCount);
+type Props = {
+  type: string;
+  category?: string;
+  genres?: string;
+};
 
-  const randomMovie = await prisma.movie.findMany({
-    take: 1,
-    skip: randomIndex,
-  });
-
-  return randomMovie[0];
-}
-
-export async function getNowPlayingMovie() {
-  const url = `${tmdbBaseURL}/movie/now_playing/?language=ko-KR&page=1`;
+export async function getTrendingAll({ type, category }: Props) {
+  const url = `${tmdbBaseURL}/${type}/${category}/week?language=ko-KR`;
   const options = {
     method: "GET",
     headers: {
@@ -28,8 +21,8 @@ export async function getNowPlayingMovie() {
     .then((data) => data.results);
 }
 
-export async function getPopularMovie() {
-  const url = `${tmdbBaseURL}/movie/popular/?language=ko-KR&page=1`;
+export async function getTopRatedOf({ type, category }: Props) {
+  const url = `${tmdbBaseURL}/${type}/${category}?language=ko-KR&page=1`;
   const options = {
     method: "GET",
     headers: {
@@ -42,9 +35,9 @@ export async function getPopularMovie() {
     .then((res) => res.json()) //
     .then((data) => data.results);
 }
+export async function getDiscoverOf({ type, category, genres }: Props) {
+  const url = `${tmdbBaseURL}/${type}/${category}?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc&with_genres=${genres}`;
 
-export async function getUpcomingMovie() {
-  const url = `${tmdbBaseURL}/movie/upcoming/?language=ko-KR&page=1`;
   const options = {
     method: "GET",
     headers: {
@@ -56,23 +49,4 @@ export async function getUpcomingMovie() {
   return await fetch(url, options)
     .then((res) => res.json()) //
     .then((data) => data.results);
-}
-
-export async function getTrendingMovies() {
-  const url = `${tmdbBaseURL}/trending/movie/day?language=ko-KR`;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
-    },
-  };
-
-  return await fetch(url, options)
-    .then((res) => res.json()) //
-    .then((data) => data.results)
-    .then((data) => {
-      const index = Math.floor(Math.random() * 20);
-      return data[index];
-    });
 }

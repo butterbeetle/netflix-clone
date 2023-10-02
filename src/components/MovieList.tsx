@@ -1,5 +1,5 @@
 import MovieCard from "./MovieCard";
-import { nowplayingMovie } from "@/model/movie";
+import { Content } from "@/model/Content";
 import ChevronLeftIcon from "./ui/icons/ChevronLeftIcon";
 import ChevronRightIcon from "./ui/icons/ChevronRightIcon";
 import Image from "next/image";
@@ -18,11 +18,13 @@ import "swiper/css/a11y";
 
 interface Props {
   title: string;
+  type: string;
   category: string;
+  genres?: string | null;
 }
-export default function MovieList({ title, category }: Props) {
-  const { data: movies } = useSWR<nowplayingMovie[]>(
-    `/api/movie/${category}/`,
+export default function MovieList({ title, type, category, genres }: Props) {
+  const { data: movies } = useSWR<Content[]>(
+    `/api/tmdb/${type}/${category}/${genres ?? null}`,
     fetcher,
     {
       revalidateOnFocus: false,
