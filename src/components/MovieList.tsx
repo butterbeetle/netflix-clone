@@ -45,7 +45,9 @@ export default function MovieList({ title, type, category, genres }: Props) {
             loop={true}
             navigation={true}
             pagination={{
-              clickable: true,
+              el: ".swiper-pagination",
+              type: "bullets",
+              clickable: false,
             }}
             slidesPerView={3}
             slidesPerGroup={3}
@@ -58,57 +60,63 @@ export default function MovieList({ title, type, category, genres }: Props) {
             }}
           >
             {movies.map((movie) => (
-              <SwiperSlide key={movie.id} className="group bg-[#141414] w-full">
-                <div className="relative w-full h-[17vw] md:h-[13vw] lg:h-[8vw]">
-                  <Image
-                    className="object-cover"
-                    src={`${tmdbImageURL}/w300/${movie.backdrop_path}`}
-                    alt="thumbnail"
-                    fill
-                    sizes="150"
-                  />
-                </div>
-                <div
-                  className="opacity-0 absolute z-10 top-0 transition duration-200
-                             delay-300 w-full scale-0 
+              <>
+                <SwiperSlide
+                  key={movie.id}
+                  className="group bg-[#141414] w-full"
+                >
+                  <div className="relative w-full h-[17vw] md:h-[13vw] lg:h-[8vw]">
+                    <Image
+                      className="object-cover"
+                      src={`${tmdbImageURL}/w300/${movie.backdrop_path}`}
+                      alt="thumbnail"
+                      fill
+                      sizes="150"
+                    />
+                  </div>
+                  <div
+                    className="opacity-0 absolute z-10 top-0 
+                    transition duration-200 delay-300 w-full scale-0 
                              group-hover:scale-150
                              group-hover:-translate-y-[12vw]
                              group-hover:opacity-100"
-                >
-                  <Image
-                    className="
+                  >
+                    <Image
+                      className="
                     cursor-pointer
                     object-cover
                     transition duration shadow-xl rounded-t-md 
                     w-full"
-                    src={`${tmdbImageURL}/w1280/${movie.backdrop_path}`}
-                    alt="thumbnail"
-                    width={200}
-                    height={200}
-                  />
-                  <div
-                    className="z-30 bg-[#171717] p-2 lg:p-4 absolute w-full 
+                      src={`${tmdbImageURL}/w1280/${movie.backdrop_path}`}
+                      alt="thumbnail"
+                      width={200}
+                      height={200}
+                    />
+                    <div
+                      className="z-30 bg-[#171717] p-2 lg:p-4 absolute w-full 
                   transition shadow-md rounded-b-md -mt-1"
-                  >
-                    <div className="flex flex-row items-center gap-3">
-                      <div
-                        className="cursor-pointer w-5 h-5 
+                    >
+                      <div className="flex flex-row items-center gap-3">
+                        <div
+                          className="cursor-pointer w-5 h-5 
                         bg-white rounded-full 
                         flex justify-center items-center 
                         transition 
                         hover:bg-neutral-300"
-                      >
-                        <PlayIcon size={10} />
+                        >
+                          <PlayIcon size={10} />
+                        </div>
                       </div>
+                      <p className="text-green-400 font-semibold mt-4">
+                        New <span className="text-white">2023</span>
+                      </p>
+                      <div className="flex flex-row mt-4 gap-2 items-center"></div>
                     </div>
-                    <p className="text-green-400 font-semibold mt-4">
-                      New <span className="text-white">2023</span>
-                    </p>
-                    <div className="flex flex-row mt-4 gap-2 items-center"></div>
                   </div>
-                </div>
-              </SwiperSlide>
+                </SwiperSlide>
+              </>
             ))}
+            <div className="swiper-pagination right-0 -top-8 "></div>
           </Swiper>
         </div>
       ) : null}
