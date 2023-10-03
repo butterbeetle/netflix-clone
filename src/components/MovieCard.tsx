@@ -1,17 +1,17 @@
 import Image from "next/image";
 import PlayIcon from "./ui/icons/PlayIcon";
-import { nowplayingMovie } from "@/model/movie";
+import { Content } from "@/model/Content";
 import { tmdbImageURL } from "@/service/tmdb";
 
 interface Props {
-  movie: nowplayingMovie;
+  movie: Content;
 }
 export default function MovieCard({ movie }: Props) {
   return (
     <div className="group bg-zinc-900 w-full">
       <Image
         className="w-1/3 h-full"
-        src={`${tmdbImageURL}/${movie.backdrop_path}`}
+        src={`${tmdbImageURL}/w300/${movie.backdrop_path}`}
         alt="thumbnail"
         priority
         width={0}

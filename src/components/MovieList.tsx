@@ -61,7 +61,7 @@ export default function MovieList({ title, type, category, genres }: Props) {
                 <div className="peer relative w-full h-[17vw]  md:h-[13vw] lg:h-[8vw]">
                   <Image
                     className="object-cover"
-                    src={`${tmdbImageURL}/${movie.backdrop_path}`}
+                    src={`${tmdbImageURL}/w300/${movie.backdrop_path}`}
                     alt="thumbnail"
                     fill
                     sizes="150"
