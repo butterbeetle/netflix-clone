@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Banner from "@/components/Banner";
 import MovieSection from "@/components/MovieSection";
 import Footer from "@/components/Footer";
+import TestListt from "@/components/TestListt";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -18,7 +19,8 @@ export default async function Home() {
     <main>
       <Navbar />
       <Banner />
-      <MovieSection />
+      {/* <MovieSection /> */}
+      <TestListt />
       <Footer />
     </main>
   );
