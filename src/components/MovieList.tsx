@@ -11,9 +11,6 @@ import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
 import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-import "swiper/css/a11y";
 
 import { useRef } from "react";
 
