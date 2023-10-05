@@ -14,9 +14,8 @@ html {
   @apply h-full;
 }
 
-.swiper {
-  z-index: 0;
-  overflow: visible !important;
+.swiper-wrapper {
+  transition-timing-function: linear;
 }
 .swiper-pagination {
   position: absolute;

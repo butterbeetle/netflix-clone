@@ -43,9 +43,9 @@ export default function MovieList({ title, type, category, genres }: Props) {
           <div className="group/visible w-full flex justify-center">
             <button
               onClick={() => swiperRef.current.swiper.slidePrev()}
-              className="w-[4%] bg-black/50 z-[2] m-0
+              className="w-[4%]  z-[2] m-0
         group/chevron
-      group-hover/visible:bg-black/75
+      group-hover/visible:bg-black/50
       "
             >
               <div
@@ -74,8 +74,10 @@ export default function MovieList({ title, type, category, genres }: Props) {
                 1400: { slidesPerView: 6, slidesPerGroup: 6 },
               }}
               pagination={{
-                clickable: true,
+                clickable: false,
               }}
+              allowTouchMove={false}
+              draggable={false}
             >
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
                 <SwiperSlide key={num}>
@@ -92,9 +94,9 @@ export default function MovieList({ title, type, category, genres }: Props) {
             </Swiper>
             <button
               onClick={() => swiperRef.current.swiper.slideNext()}
-              className="w-[4%] bg-black/50 z-[2] m-0
-        group/chevron
-      group-hover/visible:bg-black/75
+              className="w-[4%]  z-[2] m-0
+              group/chevron
+            group-hover/visible:bg-black/50
       "
             >
               <div
