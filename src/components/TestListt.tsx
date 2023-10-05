@@ -1,6 +1,13 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function TestListt() {
+  const [index, setIndex] = useState(0);
+
+  const offset = 3;
+
+  const sliderList = document.querySelector("#slider");
   return (
     <section>
       <div className="flex justify-between py-1 px-[4%]">
@@ -32,8 +39,11 @@ export default function TestListt() {
             &#8249;
           </div>
         </button>
-        <div className="relative w-[92%] flex ">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+        <div
+          className="relative w-[92%] flex transition -translate-x-[100%]"
+          id="slider"
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
             <Image
               key={num}
               className="aspect-[16/10] rounded-sm p-px
@@ -42,7 +52,7 @@ export default function TestListt() {
             md:basis-1/4 md:w-1/4 
             lg:basis-1/5 lg:w-1/5 
             xl:basis-1/6 xl:w-1/6"
-              src={`https://via.placeholder.com/2${num}0/00FF00?text=${num}`}
+              src={`https://via.placeholder.com/210/00FF00?text=slide${num}`}
               alt=""
               width={150}
               height={150}

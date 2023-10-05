@@ -19,8 +19,8 @@ export default async function Home() {
     <main>
       <Navbar />
       <Banner />
-      {/* <MovieSection /> */}
-      <TestListt />
+      <MovieSection />
+      {/* <TestListt /> */}
       <Footer />
     </main>
   );

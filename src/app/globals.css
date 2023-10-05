@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --slide-handle-size: 3rem;
-  --slide-img-gap: 0.25rem;
-}
-
 body {
   @apply bg-[#141414] h-full overflow-x-hidden select-none;
 }
@@ -17,4 +12,29 @@ body {
 
 html {
   @apply h-full;
+}
+
+.swper {
+  z-index: 0;
+}
+
+.swiper-pagination {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  background-color: aqua;
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  background-color: #4d4d4d;
+  width: 12px;
+  height: 2px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #aaa;
 }
