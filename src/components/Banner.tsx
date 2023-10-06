@@ -38,7 +38,7 @@ export default function Banner() {
           <div className="absolute w-full h-full  bg-gradient-to-t from-[#141414] to-[#141414]/10 z-[1]" />
           <Image
             className="object-cover"
-            src={`${tmdbImageURL}/original/${bannerData?.backdrop_path}`}
+            src={`${tmdbImageURL}/w1280/${bannerData?.backdrop_path}`}
             alt="thumbnail"
             fill
             sizes="150"

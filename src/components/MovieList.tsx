@@ -13,6 +13,7 @@ import fetcher from "@/lib/fetcher";
 import "swiper/css";
 
 import React, { useRef, useState } from "react";
+import { genreConversionToString } from "@/util/converter";
 
 interface Props {
   title: string;
@@ -32,6 +33,8 @@ export default function MovieList({ title, type, category, genres }: Props) {
       revalidateOnReconnect: false,
     }
   );
+
+  console.log(movies);
 
   return (
     <div className="relative">
@@ -124,9 +127,15 @@ export default function MovieList({ title, type, category, genres }: Props) {
                         </div>
                       </div>
                       <div className="flex flex-row items-center">
-                        <p className="text-white text-[10px] lg:text-sm">
-                          {genre_ids.map((genre) => genre)}
-                        </p>
+                        <div className="text-white text-[10px] lg:text-sm">
+                          {genreConversionToString(genre_ids).map(
+                            (genre, index) => (
+                              <p className="inline-block" key={index}>{`${
+                                index === 0 ? genre : "•" + genre
+                              }`}</p>
+                            )
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
