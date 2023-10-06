@@ -1,5 +1,5 @@
 "use client";
-import MovieCard from "./MovieCard";
+
 import { Content } from "@/model/Content";
 import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
@@ -12,7 +12,7 @@ import fetcher from "@/lib/fetcher";
 
 import "swiper/css";
 
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface Props {
   title: string;
@@ -22,6 +22,7 @@ interface Props {
 }
 export default function MovieList({ title, type, category, genres }: Props) {
   const swiperRef = useRef<any | null>(null);
+
   const { data: movies } = useSWR<Content[]>(
     `/api/tmdb/${type}/${category}/${genres ?? null}`,
     fetcher,
@@ -31,19 +32,20 @@ export default function MovieList({ title, type, category, genres }: Props) {
       revalidateOnReconnect: false,
     }
   );
+
   return (
-    <section>
-      {movies ? (
+    <div className="relative">
+      {true ? (
         <div>
           <div className="flex justify-between py-1 px-[4%]">
             <h3 className="text-[#E5E5E5] text-sm md:text-md lg:text-lg xl:text-xl">
               Title
             </h3>
           </div>
-          <div className="group/visible w-full flex justify-center">
+          <div className="group/visible w-full flex justify-center relative">
             <button
               onClick={() => swiperRef.current.swiper.slidePrev()}
-              className="w-[4%]  z-[2] m-0
+              className="w-[4%] m-0 z-10
         group/chevron
       group-hover/visible:bg-black/50
       "
@@ -58,10 +60,11 @@ export default function MovieList({ title, type, category, genres }: Props) {
                 &#8249;
               </div>
             </button>
+
             <Swiper
               ref={swiperRef}
               modules={[Pagination]}
-              className="relative w-[92%] flex transition"
+              className="w-[92%] "
               lazyPreloadPrevNext={6}
               loop={true}
               slidesPerView={3}
@@ -77,24 +80,63 @@ export default function MovieList({ title, type, category, genres }: Props) {
                 clickable: false,
               }}
               allowTouchMove={false}
-              draggable={false}
             >
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
-                <SwiperSlide key={num}>
+              {movies?.map(({ id, backdrop_path, genre_ids }) => (
+                <SwiperSlide className="relative group hover:z-10" key={id}>
                   <Image
-                    key={num}
-                    className="w-full aspect-[16/10] rounded-sm p-px flex-grow-0 flex-shrink-0"
-                    src={`https://via.placeholder.com/210/00FF00?text=slide${num}`}
+                    className="w-full aspect-[16/10] rounded-sm p-px"
+                    src={`${tmdbImageURL}/w300/${backdrop_path}`}
                     alt=""
                     width={150}
                     height={150}
                   />
+                  <div
+                    className="absolute top-0 w-full h-full opacity-0 scale-0 
+                    transition-all duration-500 ease-in-out delay-100 cursor-pointer
+                    group-hover:opacity-100
+                    group-hover:scale-[1.2]
+                    group-hover:-translate-y-[10vw]
+                    group-hover:mx-auto"
+                  >
+                    <Image
+                      className="w-full aspect-[16/9] rounded-md rounded-b-none"
+                      src={`${tmdbImageURL}/w300/${backdrop_path}`}
+                      alt=""
+                      width={150}
+                      height={150}
+                    />
+                    <div
+                      className="h-auto shadow-lg
+          z-10 bg-zinc-800 absolute w-full transition rounded-b-md -mt-1 pt-3 pb-1 px-6"
+                    >
+                      <div className="flex gap-2">
+                        <div
+                          className="w-6 h-6 bg-white rounded-full flex mb-2
+            justify-center items-center transition hover:bg-neutral-300"
+                        >
+                          <PlayIcon size={15} />
+                        </div>
+                        <div
+                          className="w-6 h-6 bg-white rounded-full flex mb-2
+            justify-center items-center transition hover:bg-neutral-300"
+                        >
+                          <PlayIcon size={15} />
+                        </div>
+                      </div>
+                      <div className="flex flex-row items-center">
+                        <p className="text-white text-[10px] lg:text-sm">
+                          {genre_ids.map((genre) => genre)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
+
             <button
               onClick={() => swiperRef.current.swiper.slideNext()}
-              className="w-[4%]  z-[2] m-0
+              className="w-[4%] m-0 z-10
               group/chevron
             group-hover/visible:bg-black/50
       "
@@ -112,6 +154,6 @@ export default function MovieList({ title, type, category, genres }: Props) {
           </div>
         </div>
       ) : null}
-    </section>
+    </div>
   );
 }

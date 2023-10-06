@@ -13,18 +13,18 @@ body {
 html {
   @apply h-full;
 }
-
-.swiper-wrapper {
-  transition-timing-function: linear;
+.swiper {
+  overflow: visible !important;
 }
+
 .swiper-pagination {
+  z-index: 0;
   position: absolute;
   top: -8px;
   right: 0;
   display: flex;
   gap: 1px;
   align-items: center;
-  z-index: 10;
 }
 
 .swiper-pagination-bullet {
