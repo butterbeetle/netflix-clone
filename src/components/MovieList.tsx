@@ -15,6 +15,8 @@ import "swiper/css";
 import React, { useEffect, useRef, useState } from "react";
 import { genreConversionToString } from "@/util/converter";
 import PlusIcon from "./ui/icons/PlusIcon";
+import ModalPortal from "./ui/ModalPortal";
+import CloseIcon from "./ui/icons/CloseIcon";
 
 interface Props {
   title: string;
@@ -185,6 +187,26 @@ export default function MovieList({ title, type, category, genres }: Props) {
           </div>
         </div>
       ) : null}
+      <ModalPortal>
+        <div className="absolute w-full h-full top-0 left-0 z-50 bg-neutral-900/50 flex justify-center">
+          <div className="absolute top-8 bg-amber-800 min-w-[456px] rounded-md">
+            <div className="absolute z-10 right-0 m-4 cursor-pointer w-fit p-2 text-xl rounded-full bg-black text-white">
+              <CloseIcon />
+            </div>
+            <div className="relative w-full h-1/3">
+              <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>
+              <Image
+                className="w-full aspect-[16/9]"
+                src={`http://via.placeholder.com/300/FF000/white.png?text=Test`}
+                width={100}
+                height={100}
+                alt="placeholder"
+              />
+            </div>
+            <div className="bg-[#181818] px-14">abc</div>
+          </div>
+        </div>
+      </ModalPortal>
     </div>
   );
 }
