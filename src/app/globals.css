@@ -6,17 +6,15 @@ body {
   @apply bg-[#141414] h-full overflow-x-hidden select-none;
 }
 
-#__next {
-  @apply h-full;
-}
-
 html {
   @apply h-full;
 }
 .swiper {
   overflow: visible !important;
 }
-
+.swiper-visible {
+  background-color: #4d4d4d;
+}
 .swiper-pagination {
   z-index: 0;
   position: absolute;

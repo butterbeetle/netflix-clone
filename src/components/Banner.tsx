@@ -6,11 +6,8 @@ import InfoCircleIcon from "./ui/icons/InfoCircleIcon";
 import Spinner from "./ui/Spinner";
 import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
-import { useEffect, useState } from "react";
-import { Content } from "@/model/Content";
 
 export default function Banner() {
-  const [bannerData, setBannerData] = useState<Content>();
   const { data: movie, isLoading } = useSWR(
     `/api/tmdb/trending/movie/`,
     fetcher,
@@ -20,10 +17,6 @@ export default function Banner() {
       revalidateOnReconnect: false,
     }
   );
-
-  useEffect(() => {
-    if (!isLoading) setBannerData(movie[Math.floor(Math.random() * 20)]);
-  }, [movie, isLoading]);
 
   return (
     <div className="relative h-[57vw]">
@@ -38,7 +31,7 @@ export default function Banner() {
           <div className="absolute w-full h-full  bg-gradient-to-t from-[#141414] to-[#141414]/10 z-[1]" />
           <Image
             className="object-cover"
-            src={`${tmdbImageURL}/w1280/${bannerData?.backdrop_path}`}
+            src={`${tmdbImageURL}/w1280/${movie?.backdrop_path}`}
             alt="thumbnail"
             fill
             sizes="150"
@@ -54,7 +47,7 @@ export default function Banner() {
             drop-shadow-xl
             "
             >
-              {bannerData?.title}
+              {movie?.title}
             </p>
             <p
               className="
@@ -66,7 +59,7 @@ export default function Banner() {
             line-clamp-3 lg:line-clamp-5
             "
             >
-              {bannerData?.overview}
+              {movie?.overview}
             </p>
             <div
               className="flex flex-row items-center mt-3 md:mt-4 gap-3 

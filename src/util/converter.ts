@@ -1,8 +1,11 @@
 import genresData from "../data/genres.json";
-
-export function genreConversionToString(genres: number[]) {
+/**
+ * number형식으로 된 장르를 string 형식으로 변경해주는 함수
+ * @param genres number[]
+ * @returns genres string[]
+ */
+export function genreConversionToString(genres: number[]): string[] {
   return genres.map((genre) => {
-    const genreString = genresData.genres.find((data) => data.id === genre);
-    return genreString ? genreString.name : null;
+    return genresData.genres.find((data) => data.id === genre)!.name;
   });
 }

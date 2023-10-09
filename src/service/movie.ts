@@ -6,7 +6,7 @@ type Props = {
   genres?: string;
 };
 
-export async function getTrendingAll({ type, category }: Props) {
+export async function getTrending({ type, category }: Props) {
   const url = `${tmdbBaseURL}/${type}/${category}/week?language=ko-KR`;
   const options = {
     method: "GET",
@@ -18,7 +18,11 @@ export async function getTrendingAll({ type, category }: Props) {
 
   return await fetch(url, options)
     .then((res) => res.json()) //
-    .then((data) => data.results);
+    .then((data) => data.results)
+    .then((data) => {
+      if (category === "all") return data;
+      return data[Math.floor(Math.random() * 20)];
+    });
 }
 
 export async function getTopRatedOf({ type, category }: Props) {

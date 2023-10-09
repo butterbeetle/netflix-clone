@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import { getDiscoverOf, getTopRatedOf, getTrendingAll } from "@/service/movie";
+import { getDiscoverOf, getTopRatedOf, getTrending } from "@/service/movie";
 import { NextRequest, NextResponse } from "next/server";
 
 type Context = {
@@ -23,11 +23,15 @@ export async function GET(_: NextRequest, context: Context) {
 
   const [type, category, genres] = slug;
 
+  if (type == undefined || category == undefined) {
+    return new Response("Bad Request", { status: 400 });
+  }
+
   let request = getTopRatedOf;
   if (category === "top_rated") {
     request = getTopRatedOf;
   } else if (type === "trending") {
-    request = getTrendingAll;
+    request = getTrending;
   } else if (type === "discover" && genres != null) {
     request = getDiscoverOf;
   }
