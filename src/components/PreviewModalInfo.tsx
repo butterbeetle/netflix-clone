@@ -43,8 +43,8 @@ export default function PreviewModalInfo() {
           ))}
         </div>
       </div>
-      <PreviewModalContent title={"recommendation"} />
-      <PreviewModalContent title={"similar"} />
+      <PreviewModalContent type={"recommendations"} />
+      <PreviewModalContent type={"similar"} />
     </div>
   );
 }

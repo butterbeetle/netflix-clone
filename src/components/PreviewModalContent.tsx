@@ -1,17 +1,18 @@
 import Image from "next/image";
 
-type PreviewModalContentTitle = "similar" | "recommendation";
+type PreviewModalContentType = "similar" | "recommendations";
 
 type Props = {
-  title: PreviewModalContentTitle;
+  type: PreviewModalContentType;
 };
 
-export default function PreviewModalContent({ title }: Props) {
+export default function PreviewModalContent({ type }: Props) {
+  //
   return (
     <div className="mb-12">
       <div className="text-white">
         <div className="text-2xl mb-5">
-          {title === "similar" ? "비슷한 콘텐츠" : "추천 콘텐츠"}
+          {type === "similar" ? "비슷한 콘텐츠" : "추천 콘텐츠"}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="bg-[#2f2f2f] min-h-[22em] rounded-md">

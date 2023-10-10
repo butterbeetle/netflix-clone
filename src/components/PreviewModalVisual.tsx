@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 type Props = {
-  url: string;
+  key: string;
 };
 
-export default function PreviewModalVisual({ url }: Props) {
+export default function PreviewModalVisual({ key }: Props) {
   return (
     <div className="relative w-full h-1/3">
       <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>

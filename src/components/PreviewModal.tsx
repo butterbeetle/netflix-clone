@@ -9,7 +9,7 @@ export default function PreviewModal() {
         <div className="absolute z-10 right-0 m-4 cursor-pointer w-fit p-2 text-xl rounded-full bg-black text-white">
           <CloseIcon />
         </div>
-        <PreviewModalVisual url={"aaa"} />
+        <PreviewModalVisual key={"aaa"} />
         <PreviewModalInfo />
       </div>
     </div>
