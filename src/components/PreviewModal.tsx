@@ -37,7 +37,7 @@ export default function PreviewModal({
           id={id}
           genre_ids={genre_ids}
           overview={overview}
-          title={overview}
+          title={title}
         />
       </div>
     </div>
