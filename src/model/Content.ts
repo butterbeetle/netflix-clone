@@ -13,4 +13,7 @@ export type Content = {
   vote_count: number;
 };
 
-export type TvContent = Omit<Content, "title" | "release_date"> & {};
+export type ModalContent = Pick<
+  Content,
+  "id" | "title" | "genre_ids" | "overview"
+>;
