@@ -1,23 +1,20 @@
-export default function PreviewModalVideo() {
+import Image from "next/image";
+
+type Props = {
+  key: string;
+};
+
+export default function PreviewModalVideo({ key }: Props) {
   return (
-    <div className="mb-12">
-      <div className="text-white mb-1">
-        <div className="text-2xl mb-5">관련 영상</div>
-      </div>
-      <div className="text-[#4d4d4d]">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-          <div
-            key={num}
-            className="min-h-[10rem] p-4 relative cursor-pointer rounded
-      flex items-center
-      border border-x-0
-      border-t-[#404040]
-      border-b-[#404040]"
-          >
-            {num}회
-          </div>
-        ))}
-      </div>
+    <div className="relative w-full h-1/3">
+      <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>
+      <Image
+        className="w-full aspect-[16/9] rounded-t-md"
+        src={`http://via.placeholder.com/300/FF000/white.png?text=Test`}
+        width={100}
+        height={100}
+        alt="placeholder"
+      />
     </div>
   );
 }

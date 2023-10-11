@@ -1,6 +1,6 @@
 import PreviewModalContent from "./PreviewModalContent";
 import PreviewModalCast from "./PreviewModalCast";
-import PreviewModalVideo from "./PreviewModalVideo";
+import PreviewModalRelated from "./PreviewModalRelated";
 import { ModalContent } from "@/model/Content";
 import { genreConversionToString } from "@/util/converter";
 
@@ -27,7 +27,7 @@ export default function PreviewModalInfo({
         </div>
       </div>
       <PreviewModalCast id={id} />
-      <PreviewModalVideo />
+      <PreviewModalRelated />
       <PreviewModalContent type={"recommendations"} />
       <PreviewModalContent type={"similar"} />
     </div>

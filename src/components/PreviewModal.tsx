@@ -1,5 +1,5 @@
 import CloseIcon from "./ui/icons/CloseIcon";
-import PreviewModalVisual from "./PreviewModalVisual";
+import PreviewModalVideo from "./PreviewModalVideo";
 import PreviewModalInfo from "./PreviewModalInfo";
 import { ModalContent } from "@/model/Content";
 
@@ -32,7 +32,7 @@ export default function PreviewModal({
         >
           <CloseIcon />
         </button>
-        <PreviewModalVisual key={"aaa"} />
+        <PreviewModalVideo key={"aaa"} />
         <PreviewModalInfo
           id={id}
           genre_ids={genre_ids}
