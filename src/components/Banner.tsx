@@ -9,7 +9,7 @@ import { tmdbImageURL } from "@/service/tmdb";
 
 export default function Banner() {
   const { data: movie, isLoading } = useSWR(
-    `/api/tmdb/trending/movie/`,
+    `/api/tmdb/movie/now_playing/banner`,
     fetcher,
     {
       revalidateOnFocus: false,

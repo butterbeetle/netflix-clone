@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
-import { getDiscoverOf, getTopRatedOf, getTrending } from "@/service/movie";
+import { getMovieList } from "@/service/movie";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 type Context = {
   params: {
-    slug: string[];
+    slug: [type: string, option: string];
   };
 };
 export async function GET(_: NextRequest, context: Context) {
@@ -21,22 +21,14 @@ export async function GET(_: NextRequest, context: Context) {
     return new Response("Bad Request", { status: 400 });
   }
 
-  const [type, category, genres] = slug;
+  const [type, option] = slug;
 
-  if (type == undefined || category == undefined) {
-    return new Response("Bad Request", { status: 400 });
+  let request = getMovieList;
+  if (typeof type === "number") {
+    // movie/${type}/video, movie/${type}/simliar ...
   }
 
-  let request = getTopRatedOf;
-  if (category === "top_rated") {
-    request = getTopRatedOf;
-  } else if (type === "trending") {
-    request = getTrending;
-  } else if (type === "discover" && genres != null) {
-    request = getDiscoverOf;
-  }
-
-  return request({ type, category, genres }) //
+  return request({ type, option }) //
     .then((res) => NextResponse.json(res))
     .catch((error) => new Response(JSON.stringify(error), { status: 500 }));
 }
