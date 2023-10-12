@@ -8,7 +8,7 @@ type Props = {
 export default function PreviewModalVideo({ videoKey }: Props) {
   return (
     <div className="relative w-full aspect-[16/9]">
-      <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>
+      <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>
       <ReactPlayer
         url={tmdbVideoURL + videoKey}
         width="100%"
