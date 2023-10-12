@@ -1,5 +1,5 @@
 import { BsFillVolumeUpFill } from "react-icons/bs";
 
-export default function VolumeMuteIcon() {
+export default function VolumeUpIcon() {
   return <BsFillVolumeUpFill />;
 }
