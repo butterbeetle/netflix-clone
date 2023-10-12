@@ -1,7 +1,7 @@
-import { BsChevronDown } from "react-icons/bs";
+import { BiSolidChevronDown } from "react-icons/bi";
 interface Props {
   className?: string;
 }
 export default function ChevronDownIcon({ className }: Props) {
-  return <BsChevronDown className={className} />;
+  return <BiSolidChevronDown className={className} />;
 }

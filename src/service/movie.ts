@@ -61,15 +61,15 @@ export async function getMovieList({ type, option }: MovieProps) {
 }
 
 /**
- * GET api.themoviedb.org/3/movie/{movie_id}/videos data
+ * GET api.themoviedb.org/3/movie/{movie_id}/{option}} data
  * @see https://developer.themoviedb.org/reference/movie-videos
  * @param type Movie Id
- * @return video data
+ * @param option "videos" | "credits"
+ * @return movie data
  */
-export async function getMovieVideo({ type }: MovieProps) {
-  const url = `${tmdbBaseURL}/movie/${type}/videos?language=ko-KR`;
+export async function getMovie({ type, option }: MovieProps) {
+  const url = `${tmdbBaseURL}/movie/${type}/${option}?language=ko-KR`;
 
-  console.log("url", url);
   const options = {
     method: "GET",
     headers: {
@@ -80,5 +80,8 @@ export async function getMovieVideo({ type }: MovieProps) {
 
   return await fetch(url, options)
     .then((res) => res.json()) //
-    .then((data) => data.results);
+    .then((data) => {
+      if (option === "credits") return data.cast.slice(0, 18);
+      else if (option === "videos") return data.results;
+    });
 }

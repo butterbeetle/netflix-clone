@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { getMovieList, getMovieVideo } from "@/service/movie";
+import { getMovieList, getMovie } from "@/service/movie";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
@@ -23,7 +23,7 @@ export async function GET(_: NextRequest, context: Context) {
 
   const [type, option] = slug;
 
-  let request = getMovieVideo;
+  let request = getMovie;
 
   if (type === "top_rated" || type === "now_playing" || type === "top_rated") {
     request = getMovieList;
