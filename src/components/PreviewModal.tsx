@@ -6,6 +6,7 @@ import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
+import { PulseLoader } from "react-spinners";
 
 type Props = ModalContent & {
   onClose: () => void;
@@ -50,21 +51,23 @@ export default function PreviewModal({
           <CloseIcon />
         </button>
         {isLoading ? (
-          <div className="relative w-full h-1/3">
-            <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10" />
-            <Image
-              className="w-full aspect-[16/9] rounded-t-md"
-              src={`http://via.placeholder.com/300/FFF00/?text=Loading`}
-              width={100}
-              height={100}
-              alt="placeholder"
+          <div className="relative w-full aspect-[16/9] flex items-center justify-center bg-black">
+            <div
+              className="absolute w-full h-full
+      bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%
+      flex items-center px-16 "
             />
+            <PulseLoader color="white" />
           </div>
         ) : videoKey !== undefined ? (
           <PreviewModalVideo videoKey={videoKey} />
         ) : (
-          <div className="relative w-full h-1/3">
-            <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10" />
+          <div className="relative w-full aspect-[16/9]">
+            <div
+              className="absolute w-full h-full
+      bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%
+      flex items-center px-16 "
+            />
             <Image
               className="w-full aspect-[16/9] rounded-t-md"
               src={`${tmdbImageURL}/w300/${backdrop_path}`}
