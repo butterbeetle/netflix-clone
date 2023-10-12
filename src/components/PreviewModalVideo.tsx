@@ -1,19 +1,21 @@
-import Image from "next/image";
+import { tmdbVideoURL } from "@/service/tmdb";
+import ReactPlayer from "react-player";
 
 type Props = {
-  key: string;
+  videoKey: string;
 };
 
-export default function PreviewModalVideo({ key }: Props) {
+export default function PreviewModalVideo({ videoKey }: Props) {
   return (
-    <div className="relative w-full h-1/3">
+    <div className="relative w-full aspect-[16/9]">
       <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10"></div>
-      <Image
-        className="w-full aspect-[16/9] rounded-t-md"
-        src={`http://via.placeholder.com/300/FF000/white.png?text=Test`}
-        width={100}
-        height={100}
-        alt="placeholder"
+      <ReactPlayer
+        url={tmdbVideoURL + videoKey}
+        width="100%"
+        height="100%"
+        playing={true}
+        muted={true}
+        loop={true}
       />
     </div>
   );

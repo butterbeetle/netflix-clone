@@ -15,5 +15,5 @@ export type Content = {
 
 export type ModalContent = Pick<
   Content,
-  "id" | "title" | "genre_ids" | "overview"
+  "id" | "title" | "genre_ids" | "overview" | "backdrop_path"
 >;

@@ -4,7 +4,7 @@ import MovieList from "./MovieList";
 
 const movieList = [
   { title: "높은 평점 영화", type: "movie", category: "top_rated" },
-  // { title: "지금 뜨는 영화", type: "trending", category: "movie" },
+  // { title: "현재 상영 영화", type: "movie", category: "now_playing" },
   // { title: "액션 영화",       type: "discover", category: "movie", genres: "28" },
   // { title: "코미디 영화",     type: "discover", category: "movie", genres: "35" },
   // { title: "호러 영화",       type: "discover", category: "movie", genres: "27" },

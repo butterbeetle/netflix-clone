@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
-import { getMovieList } from "@/service/movie";
+import { getMovieList, getMovieVideo } from "@/service/movie";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 type Context = {
   params: {
-    slug: [type: string, option: string];
+    slug: string[];
   };
 };
 export async function GET(_: NextRequest, context: Context) {
@@ -23,9 +23,10 @@ export async function GET(_: NextRequest, context: Context) {
 
   const [type, option] = slug;
 
-  let request = getMovieList;
-  if (typeof type === "number") {
-    // movie/${type}/video, movie/${type}/simliar ...
+  let request = getMovieVideo;
+
+  if (type === "top_rated" || type === "now_playing" || type === "top_rated") {
+    request = getMovieList;
   }
 
   return request({ type, option }) //

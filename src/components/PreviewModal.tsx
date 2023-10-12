@@ -2,6 +2,10 @@ import CloseIcon from "./ui/icons/CloseIcon";
 import PreviewModalVideo from "./PreviewModalVideo";
 import PreviewModalInfo from "./PreviewModalInfo";
 import { ModalContent } from "@/model/Content";
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
+import Image from "next/image";
+import { tmdbImageURL } from "@/service/tmdb";
 
 type Props = ModalContent & {
   onClose: () => void;
@@ -13,7 +17,20 @@ export default function PreviewModal({
   genre_ids,
   overview,
   title,
+  backdrop_path,
 }: Props) {
+  const { data: videoData, isLoading } = useSWR(
+    `api/tmdb/movie/${id}/videos`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
+
+  const videoKey = videoData?.[0]?.key;
+
   return (
     <div
       className="absolute w-full h-full top-0 left-0 z-50 bg-neutral-900/50 flex justify-center"
@@ -32,12 +49,38 @@ export default function PreviewModal({
         >
           <CloseIcon />
         </button>
-        <PreviewModalVideo key={"aaa"} />
+        {isLoading ? (
+          <div className="relative w-full h-1/3">
+            <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10" />
+            <Image
+              className="w-full aspect-[16/9] rounded-t-md"
+              src={`http://via.placeholder.com/300/FFF00/?text=Loading`}
+              width={100}
+              height={100}
+              alt="placeholder"
+            />
+          </div>
+        ) : videoKey !== undefined ? (
+          <PreviewModalVideo videoKey={videoKey} />
+        ) : (
+          <div className="relative w-full h-1/3">
+            <div className="absolute w-full h-full bg-gradient-to-t from-[#181818] to-[#181818]/10" />
+            <Image
+              className="w-full aspect-[16/9] rounded-t-md"
+              src={`${tmdbImageURL}/w300/${backdrop_path}`}
+              width={100}
+              height={100}
+              alt="placeholder"
+            />
+          </div>
+        )}
+
         <PreviewModalInfo
           id={id}
           genre_ids={genre_ids}
           overview={overview}
           title={title}
+          backdrop_path={backdrop_path}
         />
       </div>
     </div>

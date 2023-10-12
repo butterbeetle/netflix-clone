@@ -110,6 +110,7 @@ group-hover:-translate-y-12
             genre_ids={genre_ids}
             overview={overview}
             title={title}
+            backdrop_path={backdrop_path}
           />
         </ModalPortal>
       )}

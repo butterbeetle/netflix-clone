@@ -6,36 +6,6 @@ type Props = {
   option?: string | number;
 };
 
-type MovieListProps = {
-  type: string;
-  option: string;
-};
-/**
- * GET api.themoviedb.org/3/movie/top_rated data
- * @see https://developer.themoviedb.org/reference/movie-top-rated-list
- * @param type - "now_playing"|"top_rated"|"upcoming"
- * @param option top_rated
- * @returns top_rated data
- */
-export async function getMovieList({ type, option }: MovieListProps) {
-  const url = `${tmdbBaseURL}/movie/${type}?language=ko-KR&page=1`;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
-    },
-  };
-
-  return await fetch(url, options)
-    .then((res) => res.json()) //
-    .then((data) => data.results)
-    .then((data) => {
-      if (option !== "banner") return data;
-      return data[Math.floor(Math.random() * 20)];
-    });
-}
-
 /**
  * GET api.themoviedb.org/3/discover/${category} data
  * @see https://developer.themoviedb.org/reference/discover-movie
@@ -60,18 +30,46 @@ export async function getDiscoverOf({ type, category, option }: Props) {
     .then((data) => data.results);
 }
 
-type VideoProps = {
-  movieId: string;
+type MovieProps = {
+  type: string;
+  option?: string;
 };
+/**
+ * GET api.themoviedb.org/3/movie/${type} data
+ * @see https://developer.themoviedb.org/reference/movie-top-rated-list
+ * @param type - "now_playing"|"top_rated"|"upcoming"
+ * @param option top_rated
+ * @returns ${type} data
+ */
+export async function getMovieList({ type, option }: MovieProps) {
+  const url = `${tmdbBaseURL}/movie/${type}?language=ko-KR&page=1`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+    },
+  };
+
+  return await fetch(url, options)
+    .then((res) => res.json()) //
+    .then((data) => data.results)
+    .then((data) => {
+      if (option !== "banner") return data;
+      return data[Math.floor(Math.random() * 20)];
+    });
+}
+
 /**
  * GET api.themoviedb.org/3/movie/{movie_id}/videos data
  * @see https://developer.themoviedb.org/reference/movie-videos
- * @param movieId Movie Id
+ * @param type Movie Id
  * @return video data
  */
-export async function getMovieVideo({ movieId }: VideoProps) {
-  const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=ko-KR`;
+export async function getMovieVideo({ type }: MovieProps) {
+  const url = `${tmdbBaseURL}/movie/${type}/videos?language=ko-KR`;
 
+  console.log("url", url);
   const options = {
     method: "GET",
     headers: {
