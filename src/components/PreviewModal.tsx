@@ -56,20 +56,19 @@ export default function PreviewModal({
           >
             <CloseIcon />
           </button>
-          {videoKey !== undefined ? (
+          {videoKey != undefined ? (
             <PreviewModalVideo videoKey={videoKey} />
           ) : (
             <div className="relative w-full aspect-video">
               <div
                 className="absolute w-full h-full
-      bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%
-      flex items-center px-16 "
+      bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%"
               />
               <Image
-                className="w-full aspect-video rounded-t-md"
-                src={`${tmdbImageURL}/w300/${backdrop_path}`}
-                width={100}
-                height={100}
+                className="w-full rounded-t-md"
+                src={`${tmdbImageURL}/original/${backdrop_path}`}
+                width={400}
+                height={400}
                 alt="placeholder"
               />
             </div>
