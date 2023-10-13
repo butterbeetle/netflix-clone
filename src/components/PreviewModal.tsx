@@ -4,9 +4,11 @@ import PreviewModalInfo from "./PreviewModalInfo";
 import { ModalContent } from "@/model/Content";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
-import Image from "next/image";
-import { tmdbImageURL } from "@/service/tmdb";
-import { FadeLoader, PulseLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
+import PreviewModalImage from "./PreviewModalImage";
+import PreviewModalContent from "./PreviewModalContent";
+import PreviewModalCast from "./PreviewModalCast";
+import PreviewModalRelated from "./PreviewModalRelated";
 
 type Props = ModalContent & {
   onClose: () => void;
@@ -59,28 +61,20 @@ export default function PreviewModal({
           {videoKey != undefined ? (
             <PreviewModalVideo videoKey={videoKey} />
           ) : (
-            <div className="relative w-full aspect-video">
-              <div
-                className="absolute w-full h-full
-      bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%"
-              />
-              <Image
-                className="w-full rounded-t-md"
-                src={`${tmdbImageURL}/original/${backdrop_path}`}
-                width={400}
-                height={400}
-                alt="placeholder"
-              />
-            </div>
+            <PreviewModalImage imgPath={backdrop_path} />
           )}
-          <PreviewModalInfo
-            id={id}
-            genre_ids={genre_ids}
-            overview={overview}
-            title={title}
-            backdrop_path={backdrop_path}
-            videoData={videoData}
-          />
+
+          <div className="bg-[#181818] px-10 pt-2 pb-8">
+            <PreviewModalInfo
+              title={title}
+              overview={overview}
+              genre_ids={genre_ids}
+            />
+            <PreviewModalCast id={id} />
+            <PreviewModalRelated videoData={videoData} />
+            <PreviewModalContent type={"recommendations"} />
+            <PreviewModalContent type={"similar"} />
+          </div>
         </div>
       )}
     </div>
