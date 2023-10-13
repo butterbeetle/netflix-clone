@@ -84,6 +84,7 @@ export default function PreviewModal({
           overview={overview}
           title={title}
           backdrop_path={backdrop_path}
+          videoData={videoData}
         />
       </div>
     </div>

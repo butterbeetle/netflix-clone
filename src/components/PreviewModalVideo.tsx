@@ -1,4 +1,4 @@
-import { makeYoutubeLink } from "@/service/tmdb";
+import { makeYoutubeURL } from "@/service/tmdb";
 import ReactPlayer from "react-player";
 import PlusIcon from "./ui/icons/PlusIcon";
 import PlayIcon from "./ui/icons/PlayIcon";
@@ -48,7 +48,7 @@ export default function PreviewModalVideo({ videoKey }: Props) {
         </div>
       </div>
       <ReactPlayer
-        url={makeYoutubeLink(videoKey)}
+        url={makeYoutubeURL(videoKey)}
         width="100%"
         height="100%"
         playing={true}

@@ -9,7 +9,8 @@ export default function PreviewModalInfo({
   title,
   overview,
   genre_ids,
-}: ModalContent) {
+  videoData,
+}: ModalContent & any) {
   return (
     <div className="bg-[#181818] px-10 pt-2 pb-8">
       <div className="flex gap-8 mb-12">
@@ -27,7 +28,7 @@ export default function PreviewModalInfo({
         </div>
       </div>
       <PreviewModalCast id={id} />
-      <PreviewModalRelated />
+      <PreviewModalRelated videoData={videoData} />
       <PreviewModalContent type={"recommendations"} />
       <PreviewModalContent type={"similar"} />
     </div>
