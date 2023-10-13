@@ -30,7 +30,7 @@ export default function PreviewModalRelated({ videoData }: Props) {
             group-hover:opacity-100
             absolute w-full h-full bg-black/10 transition top-0 left-0"
               />
-              <div className="relative aspect-square">
+              <div className="relative aspect-square min-w-[128px]">
                 <Image
                   className="object-contain w-full aspect-square"
                   src={
@@ -54,7 +54,9 @@ export default function PreviewModalRelated({ videoData }: Props) {
                 <p className="text-[10px] text-[#d2d2d2]">
                   {engVideoTypeToKR(video.type)}
                 </p>
-                <p className="text-base text-white">{video.name}</p>
+                <p className="text-base text-white line-clamp-2">
+                  {video.name}
+                </p>
                 <p className="text-sm text-[#46d369]">
                   {publishedFormat(video.published_at)}
                 </p>
