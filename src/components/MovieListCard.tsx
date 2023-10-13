@@ -56,7 +56,7 @@ group-hover:-translate-y-12
 `}
       >
         <Image
-          className="w-full aspect-[16/9] rounded-md rounded-b-none"
+          className="w-full aspect-video rounded-md rounded-b-none"
           src={`${tmdbImageURL}/w300/${backdrop_path}`}
           alt=""
           width={150}

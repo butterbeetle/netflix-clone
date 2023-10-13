@@ -36,7 +36,7 @@ export default function MovieList({ title, type, category, genres }: Props) {
       {true ? (
         <div>
           <div className="flex justify-between py-1 px-[4%]">
-            <h3 className="text-[#E5E5E5] text-sm md:text-md lg:text-lg xl:text-xl">
+            <h3 className="text-[#E5E5E5] text-sm md:text-base lg:text-lg xl:text-xl">
               {title}
             </h3>
           </div>

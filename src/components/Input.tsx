@@ -27,7 +27,7 @@ export default function Input({
           pt-6
           pb-1
           w-full
-          text-md
+          text-base
           text-white
           bg-neutral-700
           appearance-none
@@ -41,7 +41,7 @@ export default function Input({
       <label
         className="
           absolute
-          text-md
+          text-base
           text-zinc-400
           duration-150
           transform

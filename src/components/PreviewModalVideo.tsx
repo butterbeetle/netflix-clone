@@ -12,7 +12,7 @@ type Props = {
 export default function PreviewModalVideo({ videoKey }: Props) {
   const [isMuted, setIsMuted] = useState(true);
   return (
-    <div className="relative w-full aspect-[16/9] rounded-t-md  cursor-pointer">
+    <div className="relative w-full aspect-video rounded-t-md  cursor-pointer">
       <div
         className="absolute w-full h-full
         bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%
