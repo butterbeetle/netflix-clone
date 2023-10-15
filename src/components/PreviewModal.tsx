@@ -1,7 +1,7 @@
 import CloseIcon from "./ui/icons/CloseIcon";
 import PreviewModalVideo from "./PreviewModalVideo";
 import PreviewModalInfo from "./PreviewModalInfo";
-import { ModalContent } from "@/model/Content";
+import { ModalContent, ModalContentVideo } from "@/model/Content";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { FadeLoader } from "react-spinners";
@@ -22,7 +22,7 @@ export default function PreviewModal({
   title,
   backdrop_path,
 }: Props) {
-  const { data: videoData, isLoading } = useSWR(
+  const { data: videoData, isLoading } = useSWR<ModalContentVideo[]>(
     `api/tmdb/movie/${id}/videos`,
     fetcher,
     {
@@ -71,7 +71,7 @@ export default function PreviewModal({
               genre_ids={genre_ids}
             />
             <PreviewModalCast id={id} />
-            <PreviewModalRelated videoData={videoData} />
+            {videoData && <PreviewModalRelated videoData={videoData} />}
             <PreviewModalContent type={"recommendations"} />
             <PreviewModalContent type={"similar"} />
           </div>

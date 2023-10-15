@@ -3,9 +3,10 @@ import { engVideoTypeToKR } from "@/util/converter";
 import { publishedFormat } from "@/util/date";
 import Image from "next/image";
 import PlayIcon from "./ui/icons/PlayIcon";
+import { ModalContentVideo } from "@/model/Content";
 
 type Props = {
-  videoData: any;
+  videoData: ModalContentVideo[];
 };
 export default function PreviewModalRelated({ videoData }: Props) {
   console.log(videoData);

@@ -23,6 +23,14 @@ export type ModalContentInfo = Pick<
   "title" | "overview" | "genre_ids"
 >;
 
+export type ModalContentVideo = {
+  id: string;
+  key: string;
+  name: string;
+  published_at: string;
+  type: string;
+};
+
 export type CreditProfile = {
   id: number;
   credit_id: string;
