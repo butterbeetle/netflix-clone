@@ -9,7 +9,6 @@ type Props = {
   videoData: ModalContentVideo[];
 };
 export default function PreviewModalRelated({ videoData }: Props) {
-  console.log(videoData);
   return (
     <div className="mb-12">
       <div className="text-white mb-1">
