@@ -72,8 +72,8 @@ export default function PreviewModal({
             />
             <PreviewModalCast id={id} />
             {videoData && <PreviewModalRelated videoData={videoData} />}
-            <PreviewModalContent type={"recommendations"} />
-            <PreviewModalContent type={"similar"} />
+            <PreviewModalContent id={id} type={"recommendations"} />
+            <PreviewModalContent id={id} type={"similar"} />
           </div>
         </div>
       )}

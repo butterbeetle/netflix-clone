@@ -1,3 +1,4 @@
+import { Content } from "@/model/Content";
 import { tmdbBaseURL } from "./tmdb";
 
 type Props = {
@@ -64,7 +65,7 @@ export async function getMovieList({ type, option }: MovieProps) {
  * GET api.themoviedb.org/3/movie/{movie_id}/{option}} data
  * @see https://developer.themoviedb.org/reference/movie-videos
  * @param type Movie Id
- * @param option "videos" | "credits"
+ * @param option "videos" | "credits" | "similar" | "recommendations"
  * @return movie data
  */
 export async function getMovie({ type, option }: MovieProps) {
@@ -82,6 +83,13 @@ export async function getMovie({ type, option }: MovieProps) {
     .then((res) => res.json()) //
     .then((data) => {
       if (option === "credits") return data.cast.slice(0, 18);
-      else if (option === "videos") return data.results;
+      else if (
+        option === "videos" ||
+        option === "similar" ||
+        option === "recommendations"
+      )
+        return data.results
+          .slice(0, 18)
+          .filter((video: Content) => video.backdrop_path !== null);
     });
 }

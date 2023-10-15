@@ -25,7 +25,7 @@ export async function GET(_: NextRequest, context: Context) {
 
   let request = getMovie;
 
-  if (type === "top_rated" || type === "now_playing" || type === "top_rated") {
+  if (type === "top_rated" || type === "now_playing") {
     request = getMovieList;
   }
 
