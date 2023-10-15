@@ -1,11 +1,11 @@
-import { ModalContent } from "@/model/Content";
+import { ModalContentInfo } from "@/model/Content";
 import { genreConversionToString } from "@/util/converter";
 
 export default function PreviewModalInfo({
   title,
   overview,
   genre_ids,
-}: ModalContent & any) {
+}: ModalContentInfo) {
   return (
     <div className="flex gap-8 mb-10">
       <div className="text-white text-sm flex flex-col gap-2">

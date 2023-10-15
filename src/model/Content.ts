@@ -18,6 +18,11 @@ export type ModalContent = Pick<
   "id" | "title" | "genre_ids" | "overview" | "backdrop_path"
 >;
 
+export type ModalContentInfo = Pick<
+  Content,
+  "title" | "overview" | "genre_ids"
+>;
+
 export type CreditProfile = {
   id: number;
   credit_id: string;
