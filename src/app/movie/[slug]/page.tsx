@@ -1,4 +1,5 @@
 "use client";
+
 import AntiClockWiseIcon from "@/components/ui/icons/AntiClockWiseIcon";
 import ClockWiseIcon from "@/components/ui/icons/ClockWiseIcon";
 import FullScreenIcon from "@/components/ui/icons/FullScreenIcon";
@@ -6,15 +7,10 @@ import PlayIcon from "@/components/ui/icons/PlayIcon";
 import PlayerSkipForwardIcon from "@/components/ui/icons/PlayerSkipForwardIcon";
 import SquareStackIcon from "@/components/ui/icons/SquareStackIcon";
 import VolumeUpIcon from "@/components/ui/icons/VolumeUpIcon";
-import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export default function VideoPage() {
-  const config = {
-    attributes: {
-      disablePictureInPicture: true,
-      controlsList: "nodownload",
-    },
-  };
   return (
     <div className="relative w-full h-full flex justify-center items-center flex-col bg-black">
       <div className="w-full aspect-square">
