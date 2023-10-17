@@ -1,6 +1,7 @@
 "use client";
 
 import PlayPause from "@/components/ui/PlayPause";
+import Volume from "@/components/ui/Volume";
 import AntiClockWiseIcon from "@/components/ui/icons/AntiClockWiseIcon";
 import ClockWiseIcon from "@/components/ui/icons/ClockWiseIcon";
 import FullScreenIcon from "@/components/ui/icons/FullScreenIcon";
@@ -27,8 +28,12 @@ export default function VideoPage() {
     setMount(true);
   }, []);
 
-  const onPlayingHanlder = () => {
-    setState({ ...state, playing: !state.playing });
+  const playPauseHandler = (play?: boolean) => {
+    setState({ ...state, playing: play ?? !state.playing });
+  };
+
+  const onMuteHandler = () => {
+    setState({ ...state, muted: !state.muted });
   };
 
   const onRewindHandler = (rewind: boolean) => {
@@ -39,7 +44,7 @@ export default function VideoPage() {
 
   return (
     <div className="relative w-full h-full flex justify-center items-center flex-col bg-black">
-      <div className="w-full aspect-square">
+      <div className="relative w-full aspect-square select-none">
         {mount && (
           <ReactPlayer
             ref={videoRef}
@@ -48,17 +53,19 @@ export default function VideoPage() {
             height="100%"
             playing={state.playing}
             controls={false}
-            muted={false}
+            muted={state.muted}
+            onPlay={() => playPauseHandler(true)}
+            onPause={() => playPauseHandler(false)}
           />
         )}
       </div>
       <div
         className="border-t-orange-600 border-t-2 absolute bottom-0 w-full text-white 
-      py-5 px-3 flex text-3xl justify-between gap-2"
+      py-5 px-3 flex text-3xl justify-between gap-2 z-[3]"
       >
         <div className="flex gap-3">
           <div
-            onClick={onPlayingHanlder}
+            onClick={() => playPauseHandler()}
             className="cursor-pointer hover:scale-[1.3] transition-all"
           >
             <PlayPause isPlaying={state.playing} />
@@ -81,8 +88,11 @@ export default function VideoPage() {
               10
             </div>
           </div>
-          <div className="cursor-pointer hover:scale-[1.3] transition-all">
-            <VolumeUpIcon />
+          <div
+            onClick={() => onMuteHandler()}
+            className="cursor-pointer hover:scale-[1.3] transition-all"
+          >
+            <Volume isMuted={state.muted} />
           </div>
         </div>
         <div className="text-base flex items-center">Title</div>
