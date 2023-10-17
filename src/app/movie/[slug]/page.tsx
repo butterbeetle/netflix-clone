@@ -8,7 +8,6 @@ import PlayIcon from "@/components/ui/icons/PlayIcon";
 import PlayerSkipForwardIcon from "@/components/ui/icons/PlayerSkipForwardIcon";
 import SquareStackIcon from "@/components/ui/icons/SquareStackIcon";
 import VolumeUpIcon from "@/components/ui/icons/VolumeUpIcon";
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 // const ReactPlayer = dynamic(() => import("react-player"), {
@@ -33,7 +32,6 @@ export default function VideoPage() {
   };
 
   const onRewindHandler = (rewind: boolean) => {
-    console.log(rewind);
     if (rewind)
       videoRef?.current?.seekTo(videoRef.current.getCurrentTime() - 10);
     else videoRef?.current?.seekTo(videoRef.current.getCurrentTime() + 10);
