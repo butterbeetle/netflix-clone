@@ -110,24 +110,26 @@ export default function VideoPage() {
               >
                 <Volume isMuted={state.muted} />
               </div>
-              <div
-                className="  bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14
+              <div className="hidden group-hover:block">
+                <div
+                  className="  bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14
                opacity-0 group-hover:opacity-100 -rotate-90"
-              >
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step={0.1}
-                  value={state.muted ? 0 : state.volume}
-                  onChange={(e) =>
-                    setState({
-                      ...state,
-                      muted: state.volume === 0.1 ? true : false,
-                      volume: Number(e.target.value),
-                    })
-                  }
-                />
+                >
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.1}
+                    value={state.muted ? 0 : state.volume}
+                    onChange={(e) =>
+                      setState({
+                        ...state,
+                        muted: state.volume === 0.1 ? true : false,
+                        volume: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
