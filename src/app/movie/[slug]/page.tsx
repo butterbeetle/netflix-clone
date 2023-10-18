@@ -55,10 +55,7 @@ export default function VideoPage() {
       handle={handle}
       onChange={() => fullScreenHandler()}
     >
-      <div
-        onClick={() => playPauseHandler(!state.playing)}
-        className="w-full h-full flex justify-center items-center flex-col bg-black"
-      >
+      <div className="w-full h-full flex justify-center items-center flex-col bg-black">
         <div className="relative w-full aspect-square select-none">
           {mount && (
             <ReactPlayer
@@ -113,7 +110,10 @@ export default function VideoPage() {
               >
                 <Volume isMuted={state.muted} />
               </div>
-              <div className=" bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14 opacity-0 group-hover:opacity-100 -rotate-90">
+              <div
+                className="  bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14
+               opacity-0 group-hover:opacity-100 -rotate-90"
+              >
                 <input
                   type="range"
                   min={0}
