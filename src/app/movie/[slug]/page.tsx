@@ -5,10 +5,12 @@ import Volume from "@/components/ui/Volume";
 import AntiClockWiseIcon from "@/components/ui/icons/AntiClockWiseIcon";
 import ClockWiseIcon from "@/components/ui/icons/ClockWiseIcon";
 import FullScreenIcon from "@/components/ui/icons/FullScreenIcon";
+import FullScreenExitIcon from "@/components/ui/icons/FullScreenExitIcon";
 import PlayerSkipForwardIcon from "@/components/ui/icons/PlayerSkipForwardIcon";
 import SquareStackIcon from "@/components/ui/icons/SquareStackIcon";
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 // const ReactPlayer = dynamic(() => import("react-player"), {
 //   ssr: false,
 // });
@@ -21,6 +23,7 @@ export default function VideoPage() {
     playing: false,
     muted: false,
     volume: 1,
+    fullScreen: false,
   });
 
   useEffect(() => {
@@ -40,9 +43,18 @@ export default function VideoPage() {
       videoRef?.current?.seekTo(videoRef.current.getCurrentTime() - 10);
     else videoRef?.current?.seekTo(videoRef.current.getCurrentTime() + 10);
   };
-  console.log(`Muted:${state.muted} Volume:${state.volume}`);
+
+  const handle = useFullScreenHandle();
+
+  const fullScreenHandler = () => {
+    setState({ ...state, fullScreen: !state.fullScreen });
+  };
   return (
-    <div className="relative w-full h-full flex justify-center items-center flex-col bg-black">
+    <FullScreen
+      className="relative w-full h-full flex justify-center items-center flex-col bg-black"
+      handle={handle}
+      onChange={() => fullScreenHandler()}
+    >
       <div className="relative w-full aspect-square select-none">
         {mount && (
           <ReactPlayer
@@ -54,6 +66,8 @@ export default function VideoPage() {
             controls={false}
             muted={state.muted}
             volume={state.volume}
+            loop={false}
+            onEnded={() => playPauseHandler(false)}
             onPlay={() => playPauseHandler(true)}
             onPause={() => playPauseHandler(false)}
           />
@@ -121,11 +135,14 @@ export default function VideoPage() {
           <div className="cursor-pointer hover:scale-[1.2] transition-all">
             <SquareStackIcon />
           </div>
-          <div className="cursor-pointer hover:scale-[1.2] transition-all">
-            <FullScreenIcon />
+          <div
+            onClick={state.fullScreen ? handle.enter : handle.exit}
+            className="cursor-pointer hover:scale-[1.2] transition-all"
+          >
+            {state.fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
           </div>
         </div>
       </div>
-    </div>
+    </FullScreen>
   );
 }
