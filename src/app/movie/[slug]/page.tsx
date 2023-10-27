@@ -39,9 +39,9 @@ export default function VideoPage() {
   };
 
   const onRewindHandler = (rewind: boolean) => {
-    if (rewind)
+    if (rewind) {
       videoRef?.current?.seekTo(videoRef.current.getCurrentTime() - 10);
-    else videoRef?.current?.seekTo(videoRef.current.getCurrentTime() + 10);
+    } else videoRef?.current?.seekTo(videoRef.current.getCurrentTime() + 10);
   };
 
   const handle = useFullScreenHandle();
@@ -49,6 +49,14 @@ export default function VideoPage() {
   const fullScreenHandler = () => {
     setState({ ...state, fullScreen: !state.fullScreen });
   };
+
+  const [playedState, setPlayedState] = useState({
+    played: 0,
+    playedSeconds: 0,
+    loaded: 0,
+    loadedSeconds: 0,
+  });
+
   return (
     <FullScreen
       className="relative w-full h-full"
@@ -68,6 +76,15 @@ export default function VideoPage() {
               muted={state.muted}
               volume={state.volume}
               loop={false}
+              onProgress={(progress) => {
+                setPlayedState({
+                  played: progress.played,
+                  playedSeconds: progress.playedSeconds,
+                  loaded: progress.loaded,
+                  loadedSeconds: progress.loadedSeconds,
+                });
+              }}
+              on
               onEnded={() => playPauseHandler(false)}
               onPlay={() => playPauseHandler(true)}
               onPause={() => playPauseHandler(false)}
@@ -75,77 +92,83 @@ export default function VideoPage() {
           )}
         </div>
         <div
-          className="border-t-orange-600 border-t-2 absolute bottom-0 w-full text-white 
-      py-5 px-3 flex text-3xl justify-between gap-2 z-[3]"
+          className="absolute bottom-0 w-full text-white 
+      pb-2 px-2 flex flex-col text-3xl z-[3] gap-2"
         >
-          <div className="flex gap-3">
-            <div
-              onClick={() => playPauseHandler()}
-              className="cursor-pointer hover:scale-[1.2] transition-all"
-            >
-              <PlayPause isPlaying={state.playing} />
-            </div>
-            <div
-              onClick={() => onRewindHandler(true)}
-              className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
-            >
-              <AntiClockWiseIcon />
-              <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
-                10
-              </div>
-            </div>
-            <div
-              onClick={() => onRewindHandler(false)}
-              className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
-            >
-              <ClockWiseIcon />
-              <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
-                10
-              </div>
-            </div>
-            <div className="relative group cursor-pointer  transition-all">
+          <div className="w-full flex gap-2">
+            <input className="w-full " type="range" />
+            <p className="text-[10px]">{playedState.played}</p>
+          </div>
+          <div className="flex gap-2 justify-between">
+            <div className="flex gap-3">
               <div
-                onClick={() => onMuteHandler()}
-                className="group-hover:scale-[1.2]"
+                onClick={() => playPauseHandler()}
+                className="cursor-pointer hover:scale-[1.2] transition-all"
               >
-                <Volume isMuted={state.muted} />
+                <PlayPause isPlaying={state.playing} />
               </div>
-              <div className="hidden group-hover:block">
+              <div
+                onClick={() => onRewindHandler(true)}
+                className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
+              >
+                <AntiClockWiseIcon />
+                <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
+                  10
+                </div>
+              </div>
+              <div
+                onClick={() => onRewindHandler(false)}
+                className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
+              >
+                <ClockWiseIcon />
+                <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
+                  10
+                </div>
+              </div>
+              <div className="relative group cursor-pointer  transition-all">
                 <div
-                  className="  bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14
-               opacity-0 group-hover:opacity-100 -rotate-90"
+                  onClick={() => onMuteHandler()}
+                  className="group-hover:scale-[1.2]"
                 >
-                  <input
-                    type="range"
-                    min={0}
-                    max={1}
-                    step={0.1}
-                    value={state.muted ? 0 : state.volume}
-                    onChange={(e) =>
-                      setState({
-                        ...state,
-                        muted: state.volume === 0.1 ? true : false,
-                        volume: Number(e.target.value),
-                      })
-                    }
-                  />
+                  <Volume isMuted={state.muted} />
+                </div>
+                <div className="hidden group-hover:block">
+                  <div
+                    className="  bg-[#191919] p-1 scale-[0.8] flex justify-center absolute -top-[70px] -left-14
+               opacity-0 group-hover:opacity-100 -rotate-90"
+                  >
+                    <input
+                      type="range"
+                      min={0}
+                      max={1}
+                      step={0.1}
+                      value={state.muted ? 0 : state.volume}
+                      onChange={(e) =>
+                        setState({
+                          ...state,
+                          muted: state.volume === 0.1 ? true : false,
+                          volume: Number(e.target.value),
+                        })
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="text-base flex items-center">Title</div>
-          <div className="flex gap-3">
-            <div className="cursor-pointer hover:scale-[1.2] transition-all">
-              <PlayerSkipForwardIcon />
-            </div>
-            <div className="cursor-pointer hover:scale-[1.2] transition-all">
-              <SquareStackIcon />
-            </div>
-            <div
-              onClick={state.fullScreen ? handle.enter : handle.exit}
-              className="cursor-pointer hover:scale-[1.2] transition-all"
-            >
-              {state.fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
+            <div className="text-base flex items-center">Title</div>
+            <div className="flex gap-3">
+              <div className="cursor-pointer hover:scale-[1.2] transition-all">
+                <PlayerSkipForwardIcon />
+              </div>
+              <div className="cursor-pointer hover:scale-[1.2] transition-all">
+                <SquareStackIcon />
+              </div>
+              <div
+                onClick={state.fullScreen ? handle.enter : handle.exit}
+                className="cursor-pointer hover:scale-[1.2] transition-all"
+              >
+                {state.fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
+              </div>
             </div>
           </div>
         </div>
