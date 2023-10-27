@@ -8,7 +8,7 @@ import FullScreenIcon from "@/components/ui/icons/FullScreenIcon";
 import FullScreenExitIcon from "@/components/ui/icons/FullScreenExitIcon";
 import PlayerSkipForwardIcon from "@/components/ui/icons/PlayerSkipForwardIcon";
 import SquareStackIcon from "@/components/ui/icons/SquareStackIcon";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 // const ReactPlayer = dynamic(() => import("react-player"), {
@@ -19,23 +19,29 @@ export default function VideoPage() {
   const videoRef = useRef<ReactPlayer>(null);
 
   const [mount, setMount] = useState(false);
-  const [state, setState] = useState({
-    playing: false,
+  const [videoState, setVideoState] = useState({
+    playing: true,
     muted: false,
-    volume: 1,
+    volume: 0.5,
+    played: 0,
+    seeking: false,
+    buffer: true,
     fullScreen: false,
   });
+
+  const { playing, muted, volume, played, seeking, buffer, fullScreen } =
+    videoState;
 
   useEffect(() => {
     setMount(true);
   }, []);
 
   const playPauseHandler = (play?: boolean) => {
-    setState({ ...state, playing: play ?? !state.playing });
+    setVideoState({ ...videoState, playing: play ?? !videoState.playing });
   };
 
   const onMuteHandler = () => {
-    setState({ ...state, muted: !state.muted });
+    setVideoState({ ...videoState, muted: !videoState.muted });
   };
 
   const onRewindHandler = (rewind: boolean) => {
@@ -44,23 +50,44 @@ export default function VideoPage() {
     } else videoRef?.current?.seekTo(videoRef.current.getCurrentTime() + 10);
   };
 
-  const handle = useFullScreenHandle();
+  const fullScreenhandle = useFullScreenHandle();
 
   const fullScreenHandler = () => {
-    setState({ ...state, fullScreen: !state.fullScreen });
+    setVideoState({ ...videoState, fullScreen: !videoState.fullScreen });
   };
 
-  const [playedState, setPlayedState] = useState({
-    played: 0,
-    playedSeconds: 0,
-    loaded: 0,
-    loadedSeconds: 0,
-  });
+  const progressHandler = (played: number) => {
+    if (!seeking) {
+      setVideoState({ ...videoState, played });
+    }
+  };
+
+  /**
+   * Progress bar 움직일 때
+   */
+  const onSeekHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setVideoState({ ...videoState, played: parseFloat(e.target.value) / 100 });
+  };
+
+  /**
+   * 마우스 버튼 떼었을 때
+   */
+  const onSeekMouseUpHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setVideoState({ ...videoState, seeking: false });
+    videoRef?.current?.seekTo(Number(e.target.value) / 100);
+  };
+
+  /**
+   * 마우스 버튼 클릭했을 때
+   */
+  const onSeekMouseDownHandler = () => {
+    setVideoState({ ...videoState, seeking: true });
+  };
 
   return (
     <FullScreen
       className="relative w-full h-full"
-      handle={handle}
+      handle={fullScreenhandle}
       onChange={() => fullScreenHandler()}
     >
       <div className="w-full h-full flex justify-center items-center flex-col bg-black">
@@ -71,23 +98,15 @@ export default function VideoPage() {
               url={"https://www.youtube.com/watch?v=sF61IuL9C0A"}
               width="100%"
               height="100%"
-              playing={state.playing}
               controls={false}
-              muted={state.muted}
-              volume={state.volume}
+              playing={playing}
+              muted={muted}
+              volume={volume}
               loop={false}
-              onProgress={(progress) => {
-                setPlayedState({
-                  played: progress.played,
-                  playedSeconds: progress.playedSeconds,
-                  loaded: progress.loaded,
-                  loadedSeconds: progress.loadedSeconds,
-                });
-              }}
-              on
               onEnded={() => playPauseHandler(false)}
               onPlay={() => playPauseHandler(true)}
               onPause={() => playPauseHandler(false)}
+              onProgress={(progress) => progressHandler(progress.played)}
             />
           )}
         </div>
@@ -96,8 +115,17 @@ export default function VideoPage() {
       pb-2 px-2 flex flex-col text-3xl z-[3] gap-2"
         >
           <div className="w-full flex gap-2">
-            <input className="w-full " type="range" />
-            <p className="text-[10px]">{playedState.played}</p>
+            <input
+              className="w-full "
+              type="range"
+              min={0}
+              max={100}
+              value={played * 100}
+              onChange={onSeekHandler}
+              onMouseUp={onSeekMouseUpHandler}
+              onMouseDown={onSeekMouseDownHandler}
+            />
+            <p className="text-[10px]">00:00</p>
           </div>
           <div className="flex gap-2 justify-between">
             <div className="flex gap-3">
@@ -105,7 +133,7 @@ export default function VideoPage() {
                 onClick={() => playPauseHandler()}
                 className="cursor-pointer hover:scale-[1.2] transition-all"
               >
-                <PlayPause isPlaying={state.playing} />
+                <PlayPause isPlaying={playing} />
               </div>
               <div
                 onClick={() => onRewindHandler(true)}
@@ -130,7 +158,7 @@ export default function VideoPage() {
                   onClick={() => onMuteHandler()}
                   className="group-hover:scale-[1.2]"
                 >
-                  <Volume isMuted={state.muted} />
+                  <Volume isMuted={muted} />
                 </div>
                 <div className="hidden group-hover:block">
                   <div
@@ -142,11 +170,11 @@ export default function VideoPage() {
                       min={0}
                       max={1}
                       step={0.1}
-                      value={state.muted ? 0 : state.volume}
+                      value={muted ? 0 : volume}
                       onChange={(e) =>
-                        setState({
-                          ...state,
-                          muted: state.volume === 0.1 ? true : false,
+                        setVideoState({
+                          ...videoState,
+                          muted: volume === 0.1 ? true : false,
                           volume: Number(e.target.value),
                         })
                       }
@@ -164,10 +192,12 @@ export default function VideoPage() {
                 <SquareStackIcon />
               </div>
               <div
-                onClick={state.fullScreen ? handle.enter : handle.exit}
+                onClick={
+                  fullScreen ? fullScreenhandle.enter : fullScreenhandle.exit
+                }
                 className="cursor-pointer hover:scale-[1.2] transition-all"
               >
-                {state.fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
+                {fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
               </div>
             </div>
           </div>
