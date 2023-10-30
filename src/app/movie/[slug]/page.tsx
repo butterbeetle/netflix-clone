@@ -11,6 +11,7 @@ import SquareStackIcon from "@/components/ui/icons/SquareStackIcon";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { formatTime } from "@/util/converter";
 // const ReactPlayer = dynamic(() => import("react-player"), {
 //   ssr: false,
 // });
@@ -32,6 +33,11 @@ export default function VideoPage() {
 
   const { playing, muted, volume, played, seeking, buffer, fullScreen } =
     videoState;
+
+  const currentTime = videoRef.current
+    ? videoRef.current.getCurrentTime()
+    : "00:00";
+  const duration = videoRef.current ? videoRef.current.getDuration() : "00:00";
 
   useEffect(() => {
     setMount(true);
@@ -96,7 +102,7 @@ export default function VideoPage() {
           {mount && (
             <ReactPlayer
               ref={videoRef}
-              url={"https://www.youtube.com/watch?v=sF61IuL9C0A"}
+              url={"https://www.youtube.com/watch?v=QWKT_k4Io2c"}
               width="100%"
               height="100%"
               controls={false}
@@ -118,7 +124,7 @@ export default function VideoPage() {
           <div className="w-full flex gap-2">
             <input
               ref={progressRef}
-              className="w-full "
+              className="w-full"
               type="range"
               min={0}
               max={100}
@@ -127,7 +133,11 @@ export default function VideoPage() {
               onClick={onSeekMouseUpHandler}
               onMouseDown={onSeekMouseDownHandler}
             />
-            <p className="text-[10px]">00:00</p>
+            <div className="w-[10%]">
+              <p className="w-full text-[10px] text-center">
+                {formatTime(Number(duration) - Number(currentTime))}
+              </p>
+            </div>
           </div>
           <div className="flex gap-2 justify-between">
             <div className="flex gap-3">
@@ -187,12 +197,12 @@ export default function VideoPage() {
             </div>
             <div className="text-base flex items-center">Title</div>
             <div className="flex gap-3">
-              <div className="cursor-pointer hover:scale-[1.2] transition-all">
+              {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <PlayerSkipForwardIcon />
               </div>
               <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <SquareStackIcon />
-              </div>
+              </div> */}
               <div
                 onClick={
                   fullScreen ? fullScreenhandle.enter : fullScreenhandle.exit

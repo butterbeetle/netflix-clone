@@ -28,3 +28,25 @@ export function engVideoTypeToKR(type: videoType) {
   else if (type === "Clip") return "클립 영상";
   else return "트레일러";
 }
+
+/**
+ * 00:00 형식으로 시간을 포맷팅 해주는 함수
+ * @param time 123.456 형식의 시간
+ * @returns 3:52, 4:22 ...
+ */
+export function formatTime(time: number | string) {
+  if (time == null) return "00:00";
+
+  const date = new Date(Number(time) * 1000);
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const seconds = date.getUTCSeconds().toString().padStart(2, "0");
+  console.log(hours, minutes, seconds);
+  if (hours) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")} `;
+  } else {
+    return `${minutes}:${seconds}`;
+  }
+}
