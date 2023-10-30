@@ -17,6 +17,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 export default function VideoPage() {
   const videoRef = useRef<ReactPlayer>(null);
+  const progressRef = useRef<HTMLInputElement>(null);
 
   const [mount, setMount] = useState(false);
   const [videoState, setVideoState] = useState({
@@ -72,9 +73,9 @@ export default function VideoPage() {
   /**
    * 마우스 버튼 떼었을 때
    */
-  const onSeekMouseUpHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onSeekMouseUpHandler = () => {
     setVideoState({ ...videoState, seeking: false });
-    videoRef?.current?.seekTo(Number(e.target.value) / 100);
+    videoRef?.current?.seekTo(Number(progressRef?.current?.value) / 100);
   };
 
   /**
@@ -116,13 +117,14 @@ export default function VideoPage() {
         >
           <div className="w-full flex gap-2">
             <input
+              ref={progressRef}
               className="w-full "
               type="range"
               min={0}
               max={100}
               value={played * 100}
               onChange={onSeekHandler}
-              onMouseUp={onSeekMouseUpHandler}
+              onClick={onSeekMouseUpHandler}
               onMouseDown={onSeekMouseDownHandler}
             />
             <p className="text-[10px]">00:00</p>
