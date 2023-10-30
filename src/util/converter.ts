@@ -35,7 +35,9 @@ export function engVideoTypeToKR(type: videoType) {
  * @returns 3:52, 4:22 ...
  */
 export function formatTime(time: number | string) {
-  if (time == null) return "00:00";
+  if (isNaN(Number(time))) {
+    return "00:00";
+  }
 
   const date = new Date(Number(time) * 1000);
   const hours = date.getUTCHours();
