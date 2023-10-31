@@ -99,8 +99,10 @@ export default function VideoPage() {
       onChange={() => fullScreenHandler()}
     >
       <div className="w-full h-full flex justify-center items-center flex-col bg-black">
-        <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl cursor-pointer">
-          <GoBackIcon />
+        <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl ">
+          <div className="w-fit cursor-pointer">
+            <GoBackIcon />
+          </div>
         </div>
         <div
           onClick={() => playPauseHandler()}
