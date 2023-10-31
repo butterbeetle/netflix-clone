@@ -102,6 +102,10 @@ export default function VideoPage() {
         <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl cursor-pointer">
           <GoBackIcon />
         </div>
+        <div
+          onClick={() => playPauseHandler()}
+          className="absolute w-full h-full z-[2]"
+        />
         <div className="relative w-full aspect-square select-none">
           {mount && (
             <ReactPlayer
