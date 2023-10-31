@@ -43,7 +43,7 @@ export function formatTime(time: number | string) {
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
   const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-  console.log(hours, minutes, seconds);
+  // console.log(hours, minutes, seconds);
   if (hours) {
     return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
       .toString()

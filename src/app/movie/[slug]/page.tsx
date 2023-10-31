@@ -134,16 +134,16 @@ export default function VideoPage() {
               onMouseDown={onSeekMouseDownHandler}
             />
             <div className="w-[10%]">
-              <p className="w-full text-[10px] text-center">
+              <p className="w-full text-[10px] md:text-sm lg:text-base text-center">
                 {formatTime(Number(duration) - Number(currentTime))}
               </p>
             </div>
           </div>
-          <div className="flex gap-2 justify-between">
+          <div className="flex gap-2 justify-between ">
             <div className="flex gap-3">
               <div
                 onClick={() => playPauseHandler()}
-                className="cursor-pointer hover:scale-[1.2] transition-all"
+                className="cursor-pointer hover:scale-[1.2] transition-all md:text-[40px]"
               >
                 <PlayPause isPlaying={playing} />
               </div>
@@ -151,8 +151,10 @@ export default function VideoPage() {
                 onClick={() => onRewindHandler(true)}
                 className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
               >
-                <AntiClockWiseIcon />
-                <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
+                <div className="md:text-[40px]">
+                  <AntiClockWiseIcon />
+                </div>
+                <div className="absolute w-full h-full top-0 left-0 text-[10px] md:text-sm flex justify-center items-center">
                   10
                 </div>
               </div>
@@ -160,15 +162,17 @@ export default function VideoPage() {
                 onClick={() => onRewindHandler(false)}
                 className="relative w-fit cursor-pointer hover:scale-[1.2] transition-all"
               >
-                <ClockWiseIcon />
-                <div className="absolute w-full h-full top-0 left-0 text-[10px] flex justify-center items-center">
+                <div className="md:text-[40px]">
+                  <ClockWiseIcon />
+                </div>
+                <div className="absolute w-full h-full top-0 left-0 text-[10px] md:text-sm flex justify-center items-center">
                   10
                 </div>
               </div>
               <div className="relative group cursor-pointer  transition-all">
                 <div
                   onClick={() => onMuteHandler()}
-                  className="group-hover:scale-[1.2]"
+                  className="group-hover:scale-[1.2] md:text-[40px]"
                 >
                   <Volume isMuted={muted} />
                 </div>
@@ -195,7 +199,7 @@ export default function VideoPage() {
                 </div>
               </div>
             </div>
-            <div className="text-base flex items-center">Title</div>
+            <div className="text-base md:text-xl flex items-center">Title</div>
             <div className="flex gap-3">
               {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <PlayerSkipForwardIcon />
@@ -207,7 +211,7 @@ export default function VideoPage() {
                 onClick={
                   fullScreen ? fullScreenhandle.enter : fullScreenhandle.exit
                 }
-                className="cursor-pointer hover:scale-[1.2] transition-all"
+                className="cursor-pointer hover:scale-[1.2] transition-all md:text-[40px]"
               >
                 {fullScreen ? <FullScreenIcon /> : <FullScreenExitIcon />}
               </div>
