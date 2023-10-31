@@ -12,6 +12,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { formatTime } from "@/util/converter";
+import GoBackIcon from "@/components/ui/icons/GoBackIcon";
 // const ReactPlayer = dynamic(() => import("react-player"), {
 //   ssr: false,
 // });
@@ -98,6 +99,9 @@ export default function VideoPage() {
       onChange={() => fullScreenHandler()}
     >
       <div className="w-full h-full flex justify-center items-center flex-col bg-black">
+        <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl cursor-pointer">
+          <GoBackIcon />
+        </div>
         <div className="relative w-full aspect-square select-none">
           {mount && (
             <ReactPlayer
