@@ -9,6 +9,7 @@ import PreviewModalImage from "./PreviewModalImage";
 import PreviewModalContent from "./PreviewModalContent";
 import PreviewModalCast from "./PreviewModalCast";
 import PreviewModalRelated from "./PreviewModalRelated";
+import { useEffect } from "react";
 
 type Props = ModalContent & {
   onClose: () => void;
@@ -32,14 +33,24 @@ export default function PreviewModal({
     }
   );
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.body.style.width = document.body.clientWidth - 17 + "px";
+  }, []);
+
   const videoKey = videoData?.[0]?.key;
 
+  const test = () => {
+    document.body.style.width = "unset";
+    document.body.style.overflow = "unset";
+    onClose();
+  };
   return (
     <div
-      className="absolute w-full h-full top-0 left-0 z-50 bg-neutral-900/50 flex justify-center"
+      className="fixed w-full h-full z-50 bg-neutral-900/50 flex justify-center  overflow-y-scroll"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          onClose();
+          test();
         }
       }}
     >
@@ -49,9 +60,9 @@ export default function PreviewModal({
         </div>
       )}
       {!isLoading && (
-        <div className="absolute top-8 min-w-[456px] w-[90%] md:min-w-[750px] md:max-w-[890px] ">
+        <div className="absolute top-8 min-w-[456px] w-[90%] md:min-w-[750px] md:max-w-[890px]">
           <button
-            onClick={() => onClose()}
+            onClick={() => test()}
             className="absolute z-10 right-0 m-4 cursor-pointer w-fit p-1 text-xl rounded-full bg-black text-white
           border-2 border-black
         active:border-white"

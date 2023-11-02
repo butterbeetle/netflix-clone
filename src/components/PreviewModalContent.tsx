@@ -22,7 +22,7 @@ export default function PreviewModalContent({ id, type }: Props) {
       revalidateOnReconnect: false,
     }
   );
-  console.log(type, data);
+  // console.log(type, data);
   return (
     <div className="mb-12">
       <div className="text-white">
