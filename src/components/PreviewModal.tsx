@@ -40,17 +40,18 @@ export default function PreviewModal({
 
   const videoKey = videoData?.[0]?.key;
 
-  const test = () => {
+  const closeHandler = () => {
     document.body.style.width = "unset";
     document.body.style.overflow = "unset";
     onClose();
   };
+
   return (
     <div
       className="fixed w-full h-full z-50 bg-neutral-900/50 flex justify-center  overflow-y-scroll"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          test();
+          closeHandler();
         }
       }}
     >
@@ -62,7 +63,7 @@ export default function PreviewModal({
       {!isLoading && (
         <div className="absolute top-8 min-w-[456px] w-[90%] md:min-w-[750px] md:max-w-[890px]">
           <button
-            onClick={() => test()}
+            onClick={() => closeHandler()}
             className="absolute z-10 right-0 m-4 cursor-pointer w-fit p-1 text-xl rounded-full bg-black text-white
           border-2 border-black
         active:border-white"
