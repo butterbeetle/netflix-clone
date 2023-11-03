@@ -43,7 +43,8 @@ export default function MovieList({ title, type, category, genres }: Props) {
           <div className="group/visible w-full flex justify-center">
             <button
               onClick={() => swiperRef.current.swiper.slidePrev()}
-              className="w-[4%] bg-black/50 z-[2] m-0
+              className="w-[4%] bg-black/50 z-[2] m-0 opacity-0 transition-all duration-500
+              group-hover/visible:opacity-100
         group/chevron
       group-hover/visible:bg-black/75
       "
@@ -61,7 +62,7 @@ export default function MovieList({ title, type, category, genres }: Props) {
             <Swiper
               ref={swiperRef}
               modules={[Pagination]}
-              className="relative w-[92%] flex transition"
+              className="relative w-[92%] flex transition peer"
               lazyPreloadPrevNext={6}
               loop={true}
               slidesPerView={3}
@@ -108,7 +109,8 @@ export default function MovieList({ title, type, category, genres }: Props) {
             </Swiper>
             <button
               onClick={() => swiperRef.current.swiper.slideNext()}
-              className="w-[4%] bg-black/50 z-[2] m-0
+              className="w-[4%] bg-black/50 z-[2] m-0 opacity-0 transition-all duration-500
+              group-hover/visible:opacity-100
         group/chevron
       group-hover/visible:bg-black/75
       "

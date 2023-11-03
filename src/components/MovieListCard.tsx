@@ -11,6 +11,7 @@ import PlusIcon from "./ui/icons/PlusIcon";
 import ModalPortal from "./ui/ModalPortal";
 import PreviewModal from "./PreviewModal";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   id: number;
@@ -36,7 +37,13 @@ export default function MovieListCard({
   name,
 }: Props) {
   const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
 
+  const test = () => {
+    setOpenModal(true);
+    // router.push(`/${id}`, { shallow:false,
+    //   scroll: true,
+  };
   return (
     <div>
       <Image
@@ -63,7 +70,7 @@ group-hover:-translate-y-12
           height={150}
         />
         <div
-          onClick={() => setOpenModal(true)}
+          onClick={() => test()}
           className="h-auto shadow-lg
   z-10 bg-zinc-800 absolute w-full transition rounded-b-md -mt-1 p-2"
         >
