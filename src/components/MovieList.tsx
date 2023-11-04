@@ -11,6 +11,7 @@ import "swiper/css";
 
 import React, { useRef } from "react";
 import MovieListCard from "./MovieListCard";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -33,7 +34,18 @@ export default function MovieList({ title, type, category, genres }: Props) {
 
   return (
     <div className="relative mb-8">
-      {true ? (
+      {[1, 2, 3, 4, 5].map((id, index) => (
+        <Link
+          key={index}
+          href={`/movie?id=${id}`}
+          as={`/movie/${id}`}
+          scroll={false}
+          passHref
+        >
+          {id}
+        </Link>
+      ))}
+      {false ? (
         <div>
           <div className="flex justify-between py-1 px-[4%]">
             <h3 className="text-[#E5E5E5] text-sm md:text-base lg:text-lg xl:text-xl">
