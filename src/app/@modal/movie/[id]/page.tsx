@@ -2,13 +2,21 @@
 
 import PreviewModal from "@/components/PreviewModal";
 import { useParams } from "next/navigation";
-import { ModalContent, ModalContentVideo } from "@/model/Content";
+import {
+  ActorContent,
+  Content,
+  DetailContent,
+  ModalContentVideo,
+} from "@/model/Content";
 import { FadeLoader } from "react-spinners";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Modal() {
   const { id } = useParams();
+  const router = useRouter();
 
   const { data: videoData, isLoading: isVideoDataLoading } = useSWR<
     ModalContentVideo[]
@@ -18,8 +26,30 @@ export default function Modal() {
     revalidateOnReconnect: false,
   });
 
-  const { data: detailData, isLoading: isDetailDataLoading } = useSWR(
-    `/api/tmdb/movie/${id}/detail`,
+  const { data: detailData, isLoading: isDetailDataLoading } =
+    useSWR<DetailContent>(`/api/tmdb/movie/${id}/detail`, fetcher, {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    });
+
+  const { data: actorData, isLoading: isActorDataLoading } = useSWR<
+    ActorContent[]
+  >(`/api/tmdb/movie/${id}/credits`, fetcher, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+    revalidateOnReconnect: false,
+  });
+
+  const { data: recommendationsData, isLoading: isRecommendationsLoading } =
+    useSWR<Content[]>(`/api/tmdb/movie/${id}/recommendations`, fetcher, {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    });
+
+  const { data: similarData, isLoading: isSimilarLoading } = useSWR<Content[]>(
+    `/api/tmdb/movie/${id}/similar`,
     fetcher,
     {
       revalidateOnFocus: false,
@@ -28,25 +58,56 @@ export default function Modal() {
     }
   );
 
-  const videoKey = videoData?.[0]?.key;
+  const loading =
+    isVideoDataLoading ||
+    isDetailDataLoading ||
+    isActorDataLoading ||
+    isRecommendationsLoading ||
+    isSimilarLoading;
 
-  console.log(videoData, detailData);
+  // console.log(
+  //   loading,
+  //   videoData,
+  //   detailData,
+  //   actorData,
+  //   recommendationsData,
+  //   similarData
+  // );
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.body.style.width = document.body.clientWidth - 17 + "px";
+  }, []);
+
+  const closeHandler = () => {
+    document.body.style.width = "unset";
+    document.body.style.overflow = "unset";
+    router.back();
+  };
   return (
-    <div className="absolute top-0">
-      {isVideoDataLoading && (
+    <div
+      className="absolute top-0 left-0 w-full h-full z-50  flex justify-center  overflow-y-scroll"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          closeHandler();
+        }
+      }}
+    >
+      {loading && (
         <div className="flex justify-center top-1/3 relative">
           <FadeLoader color="white" />
         </div>
       )}
-      {!isVideoDataLoading && <div className="text-white text-lg">Hi</div>}
+      {!loading && (
+        <PreviewModal
+          onClose={() => closeHandler()}
+          videoData={videoData!}
+          detailData={detailData!}
+          actorData={actorData!}
+          recommendationsData={recommendationsData!}
+          similarData={similarData!}
+        />
+      )}
     </div>
-    // <PreviewModal
-    //   onClose={() => router.back()}
-    //   id={238}
-    //   genre_ids={[18, 80]}
-    //   overview={"overview"}
-    //   title={"title"}
-    //   backdrop_path={"/tmU7GeKVybMWFButWEGl2M4GeiP.jpg"}
-    // />
   );
 }

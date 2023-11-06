@@ -3,27 +3,18 @@ import Image from "next/image";
 import { useState } from "react";
 import useSWR from "swr";
 import ChevronDownIcon from "./ui/icons/ChevronDownIcon";
-import { CreditProfile } from "@/model/Content";
+import { ActorContent } from "@/model/Content";
 import { tmdbImageURL } from "@/service/tmdb";
 import UserIcon from "./ui/icons/UserIcon";
 
 type Props = {
-  id: number;
+  actorData: ActorContent[];
 };
 
-export default function PreviewModalCast({ id }: Props) {
+export default function PreviewModalCast({ actorData }: Props) {
   const offset = 6;
   const maxActor = 18;
   const [index, setIndex] = useState(offset);
-  const { data: actorData } = useSWR<CreditProfile[]>(
-    `api/tmdb/movie/${id}/credits`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      revalidateIfStale: false,
-      revalidateOnReconnect: false,
-    }
-  );
 
   const offsetHandler = () => {
     setIndex((prev) => (index >= maxActor ? offset : prev + offset));

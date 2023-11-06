@@ -8,21 +8,11 @@ import { tmdbImageURL } from "@/service/tmdb";
 type PreviewModalContentType = "similar" | "recommendations";
 
 type Props = {
-  id: number;
-  type: PreviewModalContentType;
+  type: string;
+  data: Content[];
 };
 
-export default function PreviewModalContent({ id, type }: Props) {
-  const { data, isLoading } = useSWR<Content[]>(
-    `api/tmdb/movie/${id}/${type}/`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      revalidateIfStale: false,
-      revalidateOnReconnect: false,
-    }
-  );
-  // console.log(type, data);
+export default function PreviewModalContent({ type, data }: Props) {
   return (
     <div className="mb-12">
       <div className="text-white">

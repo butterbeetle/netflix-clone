@@ -85,7 +85,6 @@ export async function getMovie({ type, option }: MovieProps) {
   return await fetch(url, options)
     .then((res) => res.json()) //
     .then((data) => {
-      console.log(option, data, "----------------------");
       if (option === "credits") return data.cast.slice(0, 18);
       else if (
         option === "videos" ||
