@@ -48,7 +48,7 @@ export default function PreviewModal({
 
   return (
     <div
-      className="fixed w-full h-full z-50 bg-neutral-900/50 flex justify-center  overflow-y-scroll"
+      className="absolute w-full h-full z-50 bg-neutral-900/50 flex justify-center  overflow-y-scroll"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           closeHandler();

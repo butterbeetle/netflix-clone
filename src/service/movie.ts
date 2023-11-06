@@ -69,7 +69,10 @@ export async function getMovieList({ type, option }: MovieProps) {
  * @return movie data
  */
 export async function getMovie({ type, option }: MovieProps) {
-  const url = `${tmdbBaseURL}/movie/${type}/${option}?language=ko-KR`;
+  let url = `${tmdbBaseURL}/movie/${type}`;
+  if (option !== "detail") {
+    url += `/${option}?language=ko-KR`;
+  }
 
   const options = {
     method: "GET",
@@ -82,14 +85,18 @@ export async function getMovie({ type, option }: MovieProps) {
   return await fetch(url, options)
     .then((res) => res.json()) //
     .then((data) => {
+      console.log(option, data, "----------------------");
       if (option === "credits") return data.cast.slice(0, 18);
       else if (
         option === "videos" ||
         option === "similar" ||
         option === "recommendations"
-      )
+      ) {
         return data.results
           .slice(0, 18)
           .filter((video: Content) => video.backdrop_path !== null);
+      } else if (option === "detail") {
+        return data;
+      }
     });
 }
