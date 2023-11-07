@@ -12,11 +12,12 @@ import { FadeLoader } from "react-spinners";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Modal() {
   const { id } = useParams();
   const router = useRouter();
+  const pathname = usePathname();
 
   const { data: videoData, isLoading: isVideoDataLoading } = useSWR<
     ModalContentVideo[]
@@ -80,10 +81,13 @@ export default function Modal() {
   }, []);
 
   const closeHandler = () => {
+    router.back();
     document.body.style.width = "unset";
     document.body.style.overflow = "unset";
-    router.back();
   };
+
+  console.log("ID:", id, pathname, pathname.includes("movie"));
+
   return (
     <div
       className="absolute top-0 left-0 w-full h-full z-50  flex justify-center  overflow-y-scroll"

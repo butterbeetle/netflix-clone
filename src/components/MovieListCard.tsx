@@ -36,14 +36,6 @@ export default function MovieListCard({
   vote_average,
   name,
 }: Props) {
-  const [openModal, setOpenModal] = useState(false);
-  const router = useRouter();
-
-  const test = () => {
-    setOpenModal(true);
-    // router.push(`/${id}`, { shallow:false,
-    //   scroll: true,
-  };
   return (
     <div>
       <Image
@@ -70,7 +62,6 @@ group-hover:-translate-y-12
           height={150}
         />
         <div
-          onClick={() => test()}
           className="h-auto shadow-lg
   z-10 bg-zinc-800 absolute w-full transition rounded-b-md -mt-1 p-2"
         >

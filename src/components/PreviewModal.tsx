@@ -41,7 +41,11 @@ export default function PreviewModal({
         <CloseIcon />
       </button>
       {videoKey != undefined ? (
-        <PreviewModalVideo videoKey={videoKey} />
+        <PreviewModalVideo
+          videoData={videoData}
+          videoKey={videoKey}
+          onClose={onClose}
+        />
       ) : (
         <PreviewModalImage imgPath={detailData.backdrop_path} />
       )}

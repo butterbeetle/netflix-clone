@@ -1,16 +1,35 @@
+"use client";
+
 import { makeYoutubeURL } from "@/service/tmdb";
 import ReactPlayer from "react-player";
 import PlusIcon from "./ui/icons/PlusIcon";
 import PlayIcon from "./ui/icons/PlayIcon";
 import { useState } from "react";
 import Volume from "./ui/Volume";
+import { ModalContentVideo } from "@/model/Content";
+import { useRouter } from "next/navigation";
 
 type Props = {
+  onClose: () => void;
+  videoData: ModalContentVideo[];
   videoKey: string;
 };
 
-export default function PreviewModalVideo({ videoKey }: Props) {
+export default function PreviewModalVideo({
+  videoKey,
+  videoData,
+  onClose,
+}: Props) {
   const [isMuted, setIsMuted] = useState(true);
+  const router = useRouter();
+
+  const linkHandler = () => {
+    // onClose();
+    // console.log("onClose");
+    router.push(`/watch/${videoKey}`);
+    console.log("push");
+  };
+
   return (
     <div className="relative w-full aspect-video rounded-t-md  cursor-pointer">
       <div
@@ -25,7 +44,9 @@ export default function PreviewModalVideo({ videoKey }: Props) {
                 <div className="inline-block ">
                   <PlayIcon size={15} />
                 </div>
-                <p className="inline-block text-[10px]">재생</p>
+                <div onClick={() => linkHandler()}>
+                  <p className="inline-block text-[10px]">재생</p>
+                </div>
               </div>
               <div
                 className="w-8 h-8 bg-black/10 rounded-full flex 
