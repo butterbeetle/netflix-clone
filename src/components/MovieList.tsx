@@ -12,6 +12,9 @@ import "swiper/css";
 import React, { useRef } from "react";
 import MovieListCard from "./MovieListCard";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import Modal from "./ui/Modal";
+import ModalPortal from "./ui/ModalPortal";
 
 interface Props {
   title: string;
@@ -21,6 +24,8 @@ interface Props {
 }
 export default function MovieList({ title, type, category, genres }: Props) {
   const swiperRef = useRef<any | null>(null);
+  const params = useSearchParams();
+  const modalId = params.get("id");
 
   const { data: movies } = useSWR<Content[]>(
     `/api/tmdb/${type}/${category}/${genres ?? null}`,
@@ -129,6 +134,11 @@ export default function MovieList({ title, type, category, genres }: Props) {
           </div>
         </div>
       ) : null}
+      {modalId && (
+        <ModalPortal>
+          <Modal id={modalId} />
+        </ModalPortal>
+      )}
     </div>
   );
 }

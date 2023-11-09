@@ -9,6 +9,6 @@ export default async function Home() {
   if (!user) {
     redirect("/api/auth/signin");
   } else {
-    redirect("/movie");
+    redirect("/browse");
   }
 }

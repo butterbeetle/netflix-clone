@@ -65,7 +65,7 @@ group-hover:-translate-y-12
           className="h-auto shadow-lg
   z-10 bg-zinc-800 absolute w-full transition rounded-b-md -mt-1 p-2"
         >
-          <Link href={`/movie?id=${id}`} as={`/movie/${id}`}>
+          <Link as={`/browse?id=${id}`} href={`/browse/${id}`} scroll={false}>
             <div className="relative">
               {/* <div className="absolute top-0 flex gap-2 w-fit">
                 <Link

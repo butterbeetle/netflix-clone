@@ -5,9 +5,6 @@ import MovieSection from "@/components/MovieSection";
 import Footer from "@/components/Footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-
-import _ from "lodash";
-
 export default async function MoviePage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;

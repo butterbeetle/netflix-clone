@@ -1,7 +1,6 @@
 "use client";
 
 import PreviewModal from "@/components/PreviewModal";
-import { useParams } from "next/navigation";
 import {
   ActorContent,
   Content,
@@ -12,12 +11,13 @@ import { FadeLoader } from "react-spinners";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export default function Modal() {
-  const { id } = useParams();
+type Props = {
+  id: string;
+};
+export default function Modal({ id }: Props) {
   const router = useRouter();
-  const pathname = usePathname();
 
   const { data: videoData, isLoading: isVideoDataLoading } = useSWR<
     ModalContentVideo[]
@@ -66,52 +66,45 @@ export default function Modal() {
     isRecommendationsLoading ||
     isSimilarLoading;
 
-  // console.log(
-  //   loading,
-  //   videoData,
-  //   detailData,
-  //   actorData,
-  //   recommendationsData,
-  //   similarData
-  // );
-
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    document.body.style.width = document.body.clientWidth - 17 + "px";
+    // document.body.style.width = document.body.clientWidth - 17 + "px";
   }, []);
 
   const closeHandler = () => {
-    router.back();
-    document.body.style.width = "unset";
     document.body.style.overflow = "unset";
+    // document.body.style.width = "unset";
+    router.back();
   };
 
-  console.log("ID:", id, pathname, pathname.includes("movie"));
-
   return (
-    <div
-      className="absolute top-0 left-0 w-full h-full z-50  flex justify-center  overflow-y-scroll"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          closeHandler();
-        }
-      }}
-    >
+    <>
       {loading && (
-        <div className="flex justify-center top-1/3 relative">
-          <FadeLoader color="white" />
+        <div className="absolute top-0 left-0 w-full h-full z-50 bg-black/90">
+          <div className="flex justify-center top-1/3 relative">
+            <FadeLoader color="red" />
+          </div>
         </div>
       )}
       {!loading && (
-        <PreviewModal
-          onClose={() => closeHandler()}
-          videoData={videoData!}
-          detailData={detailData!}
-          actorData={actorData!}
-          recommendationsData={recommendationsData!}
-          similarData={similarData!}
-        />
+        <div
+          className="absolute top-0 left-0 w-full h-full z-50  flex justify-center  overflow-y-scroll bg-black/90"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeHandler();
+            }
+          }}
+        >
+          <PreviewModal
+            onClose={() => closeHandler()}
+            videoData={videoData!}
+            detailData={detailData!}
+            actorData={actorData!}
+            recommendationsData={recommendationsData!}
+            similarData={similarData!}
+          />
+        </div>
       )}
-    </div>
+    </>
   );
 }
