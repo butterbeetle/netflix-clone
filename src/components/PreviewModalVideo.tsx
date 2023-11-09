@@ -10,22 +10,15 @@ import { ModalContentVideo } from "@/model/Content";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  onClose: () => void;
   videoData: ModalContentVideo[];
   videoKey: string;
 };
 
-export default function PreviewModalVideo({
-  videoKey,
-  videoData,
-  onClose,
-}: Props) {
+export default function PreviewModalVideo({ videoKey, videoData }: Props) {
   const [isMuted, setIsMuted] = useState(true);
   const router = useRouter();
 
   const linkHandler = () => {
-    // onClose();
-    // console.log("onClose");
     router.push(`/watch/${videoKey}`);
     console.log("push");
   };

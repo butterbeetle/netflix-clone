@@ -80,7 +80,7 @@ export default function Modal({ id }: Props) {
   return (
     <>
       {loading && (
-        <div className="absolute top-0 left-0 w-full h-full z-50 bg-black/90">
+        <div className="absolute top-0 left-0 w-full h-auto z-50 bg-black/90 ">
           <div className="flex justify-center top-1/3 relative">
             <FadeLoader color="red" />
           </div>
@@ -88,7 +88,7 @@ export default function Modal({ id }: Props) {
       )}
       {!loading && (
         <div
-          className="absolute top-0 left-0 w-full h-full z-50  flex justify-center  overflow-y-scroll bg-black/90"
+          className="absolute top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/90 "
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               closeHandler();

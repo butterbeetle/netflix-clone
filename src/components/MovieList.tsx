@@ -11,7 +11,6 @@ import "swiper/css";
 
 import React, { useRef } from "react";
 import MovieListCard from "./MovieListCard";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Modal from "./ui/Modal";
 import ModalPortal from "./ui/ModalPortal";

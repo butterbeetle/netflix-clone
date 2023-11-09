@@ -18,7 +18,7 @@ const movieList = [
 
 export default function MovieSection() {
   return (
-    <section className="relative h-full z-[2] -top-[12.5vw] flex flex-col overflow-x-hidden pt-10">
+    <section className="relative z-[2] -top-[12.5vw] flex flex-col overflow-x-hidden pt-10">
       {movieList.map(({ title, type, category }) => (
         <MovieList
           key={title}

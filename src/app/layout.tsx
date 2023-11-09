@@ -16,9 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
-        {children}
+      <body
+        className={`${inter.className} bg-[#141414] overflow-x-hidden select-none relative h-full`}
+      >
         <div id="portal" />
+        {children}
       </body>
     </html>
   );

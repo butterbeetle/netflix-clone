@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-[#141414] h-full overflow-x-hidden select-none;
-}
-
-html {
-  @apply h-full;
-}
-
 .swiper {
   overflow: visible !important;
 }

@@ -13,6 +13,8 @@ import ReactPlayer from "react-player";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { formatTime } from "@/util/converter";
 import GoBackIcon from "@/components/ui/icons/GoBackIcon";
+import { makeYoutubeURL } from "@/service/tmdb";
+import { useParams } from "next/navigation";
 // const ReactPlayer = dynamic(() => import("react-player"), {
 //   ssr: false,
 // });
@@ -20,7 +22,9 @@ import GoBackIcon from "@/components/ui/icons/GoBackIcon";
 export default function VideoPage() {
   const videoRef = useRef<ReactPlayer>(null);
   const progressRef = useRef<HTMLInputElement>(null);
+  const params = useParams();
 
+  console.log("params", params);
   const [mount, setMount] = useState(false);
   const [videoState, setVideoState] = useState({
     playing: true,
@@ -112,7 +116,7 @@ export default function VideoPage() {
           {mount && (
             <ReactPlayer
               ref={videoRef}
-              url={"https://www.youtube.com/watch?v=QWKT_k4Io2c"}
+              url={"https://www.youtube.com/watch?v=m7Hthc3bYsc"}
               width="100%"
               height="100%"
               controls={false}

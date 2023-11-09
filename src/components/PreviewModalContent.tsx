@@ -23,7 +23,7 @@ export default function PreviewModalContent({ type, data }: Props) {
           {data?.slice(0, 2).map((dd) => (
             <div
               key={dd.id}
-              className="bg-[#2f2f2f] min-h-[22em] rounded-md hover:cursor-pointer"
+              className="bg-[#2f2f2f] min-h-[22em] rounded-md hover:cursor-pointer pb-4"
             >
               <Image
                 className="aspect-video object-cover w-full rounded-t-md"
@@ -49,7 +49,11 @@ export default function PreviewModalContent({ type, data }: Props) {
                 </div>
               </div>
               <div className="text-sm px-4 line-clamp-[7] text-[#d2d2d2]">
-                {dd.overview.length > 0 ? dd.overview : "내용이 비어있습니다."}
+                {dd.overview.length > 0 ? (
+                  dd.overview
+                ) : (
+                  <p className="text-center">내용이 비어있습니다...!</p>
+                )}
               </div>
             </div>
           ))}

@@ -21,7 +21,7 @@ const footerMenu = [
 
 export default function Footer() {
   return (
-    <div className="mx-auto max-w-[980px] px-[4%] pb-8 ">
+    <div className="relative mx-auto max-w-[980px] px-[4%] pb-8 ">
       <div className="text-white flex gap-8 mt-[70px] mb-6 ">
         <FacebookIcon size={25} className={"cursor-pointer"} />
         <InstagramIcon size={25} className={"cursor-pointer"} />
