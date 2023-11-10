@@ -39,7 +39,7 @@ export default function MovieListCard({
   return (
     <div>
       <Image
-        className="w-full aspect-[16/10] rounded-sm p-px flex-grow-0 flex-shrink-0"
+        className="w-full aspect-video rounded-sm p-px flex-grow-0 flex-shrink-0"
         src={`${tmdbImageURL}/w300/${backdrop_path}`}
         alt=""
         width={150}

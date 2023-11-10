@@ -19,22 +19,24 @@ export default function Banner() {
   );
 
   return (
-    <div className="relative h-[57vw]">
-      {isLoading && (
+    <>
+      {false && (
         <div className="flex flex-col items-center justify-center w-full h-full gap-4">
           <Spinner color={"white"} />
           <p className="text-white text-sm">데이터를 불러오고 있습니다...</p>
         </div>
       )}
-      {!isLoading && (
-        <div className="relative w-full h-full">
+      {!false && (
+        <div className="relative w-full h-[57vw] ">
           <div className="absolute w-full h-full  bg-gradient-to-t from-[#141414] to-[#141414]/10 z-[1]" />
           <Image
-            className="object-cover"
-            src={`${tmdbImageURL}/w1280/${movie?.backdrop_path}`}
+            className="w-full h-full aspect-video"
+            src={`${tmdbImageURL}/w1280${movie?.backdrop_path}`}
             alt="thumbnail"
-            fill
-            sizes="150"
+            width={150}
+            height={150}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==" // 추가
             priority
           />
           <div className="absolute bottom-[15vw] lg:bottom-[20vw] ml-6 md:ml-12 z-[1]">
@@ -93,6 +95,6 @@ export default function Banner() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

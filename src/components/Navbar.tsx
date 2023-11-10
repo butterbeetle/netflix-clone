@@ -38,7 +38,7 @@ export default function Navbar() {
     setShowAccountMenu((cur) => !cur);
   }, []);
   return (
-    <nav className="w-full fixed z-40 select-none">
+    <nav className="top-0 h-auto min-h-[70px] w-full sticky z-40 select-none">
       <div
         className={`${
           showBackground ? "bg-zinc-900/90" : ""

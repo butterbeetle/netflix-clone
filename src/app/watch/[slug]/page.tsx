@@ -98,7 +98,7 @@ export default function VideoPage() {
 
   return (
     <FullScreen
-      className="relative w-full h-full"
+      className="relative w-screen h-screen "
       handle={fullScreenhandle}
       onChange={() => fullScreenHandler()}
     >

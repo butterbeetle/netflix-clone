@@ -5,6 +5,7 @@ import MovieSection from "@/components/MovieSection";
 import Footer from "@/components/Footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+
 export default async function MoviePage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
@@ -15,8 +16,10 @@ export default async function MoviePage() {
   return (
     <>
       <Navbar />
-      <Banner />
-      <MovieSection />
+      <div className="relative min-h-[1000px] mt-[-70px] overflow-x-hidden">
+        <Banner />
+        <MovieSection />
+      </div>
       <Footer />
     </>
   );
