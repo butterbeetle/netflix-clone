@@ -79,23 +79,23 @@ export default function Modal({ id }: Props) {
 
   return (
     <>
-      {loading && (
-        <div className="absolute top-0 left-0 w-full h-auto z-50 bg-black/90 ">
-          <div className="flex justify-center top-1/3 relative">
-            <FadeLoader color="red" />
-          </div>
-        </div>
-      )}
-      {!loading && (
-        <div
-          className="fixed top-0 left-0 flex justify-center w-full h-full z-50
+      <div
+        className="fixed top-0 left-0 flex justify-center w-full h-full z-50
            bg-black/70 box-border will-change-scroll overflow-y-scroll"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              closeHandler();
-            }
-          }}
-        >
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            closeHandler();
+          }
+        }}
+      >
+        {loading && (
+          <div>
+            <div className="flex justify-center top-1/3 relative">
+              <FadeLoader color="red" />
+            </div>
+          </div>
+        )}
+        {!loading && (
           <PreviewModal
             onClose={() => closeHandler()}
             videoData={videoData!}
@@ -104,8 +104,8 @@ export default function Modal({ id }: Props) {
             recommendationsData={recommendationsData!}
             similarData={similarData!}
           />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
