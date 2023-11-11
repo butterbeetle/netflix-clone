@@ -7,6 +7,7 @@ import Spinner from "./ui/Spinner";
 import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
 import { BannerContent } from "@/model/Content";
+import Link from "next/link";
 
 export default function Banner() {
   const { data: movie, isLoading } = useSWR<BannerContent>(
@@ -70,10 +71,13 @@ export default function Banner() {
               className="flex flex-row items-center mt-3 md:mt-4 gap-3 
                 "
             >
-              <button
+              <Link
+                as={`/browse?id=${movie!.id}`}
+                href={`/browse/${movie!.id}`}
+                scroll={false}
                 className="
                 bg-white/30
-                hover:bg-red
+                hover:bg-red-500
                 text-white
                 rounded-md
                 px-2
@@ -81,19 +85,18 @@ export default function Banner() {
                 w-auto
                 font-semibold
                 flex
-                flex-row
                 items-center
                 transition
               "
               >
-                <InfoCircleIcon className="mr-2" />
+                <InfoCircleIcon className="mr-1" />
                 <p
                   className="
-                text-base"
+                text-sm"
                 >
                   상세 정보
                 </p>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

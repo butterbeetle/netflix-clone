@@ -31,10 +31,7 @@ export type ModalContentInfo = Pick<
   ModalContent,
   "title" | "overview" | "genre_ids"
 >;
-export type BannerContent = Pick<
-  ModalContent,
-  "title" | "overview" | "backdrop_path"
->;
+export type BannerContent = Omit<ModalContent, "genre_ids">;
 
 export type ModalContentVideo = {
   id: string;
