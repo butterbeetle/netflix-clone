@@ -6,9 +6,10 @@ import InfoCircleIcon from "./ui/icons/InfoCircleIcon";
 import Spinner from "./ui/Spinner";
 import Image from "next/image";
 import { tmdbImageURL } from "@/service/tmdb";
+import { BannerContent } from "@/model/Content";
 
 export default function Banner() {
-  const { data: movie, isLoading } = useSWR(
+  const { data: movie, isLoading } = useSWR<BannerContent>(
     `/api/tmdb/movie/now_playing/banner`,
     fetcher,
     {
@@ -20,23 +21,25 @@ export default function Banner() {
 
   return (
     <>
-      {false && (
-        <div className="flex flex-col items-center justify-center w-full h-full gap-4">
-          <Spinner color={"white"} />
-          <p className="text-white text-sm">데이터를 불러오고 있습니다...</p>
+      {isLoading && (
+        <div className="relative w-full h-[57vw]">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+            <Spinner color={"white"} />
+            <p className="text-white text-sm">데이터를 불러오고 있습니다...</p>
+          </div>
         </div>
       )}
-      {!false && (
+      {!isLoading && (
         <div className="relative w-full h-[57vw] ">
           <div className="absolute w-full h-full  bg-gradient-to-t from-[#141414] to-[#141414]/10 z-[1]" />
           <Image
             className="w-full h-full aspect-video"
-            src={`${tmdbImageURL}/w1280${movie?.backdrop_path}`}
+            src={`${tmdbImageURL}/w1280/${movie!.backdrop_path}`}
             alt="thumbnail"
-            width={150}
-            height={150}
+            width={1280}
+            height={1280}
             placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==" // 추가
+            blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBAB  bWyZJf74GZgAAAABJRU5ErkJggg=="
             priority
           />
           <div className="absolute bottom-[15vw] lg:bottom-[20vw] ml-6 md:ml-12 z-[1]">
@@ -49,7 +52,7 @@ export default function Banner() {
             drop-shadow-xl
             "
             >
-              {movie?.title}
+              {movie!.title}
             </p>
             <p
               className="
@@ -61,7 +64,7 @@ export default function Banner() {
             line-clamp-3 lg:line-clamp-5
             "
             >
-              {movie?.overview}
+              {movie!.overview}
             </p>
             <div
               className="flex flex-row items-center mt-3 md:mt-4 gap-3 

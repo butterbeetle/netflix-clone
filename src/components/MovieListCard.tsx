@@ -39,11 +39,13 @@ export default function MovieListCard({
   return (
     <div>
       <Image
-        className="w-full aspect-video rounded-sm p-px flex-grow-0 flex-shrink-0"
+        className="w-full aspect-video p-px "
         src={`${tmdbImageURL}/w300/${backdrop_path}`}
-        alt=""
+        alt="list"
         width={150}
         height={150}
+        placeholder="blur"
+        blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBAB  bWyZJf74GZgAAAABJRU5ErkJggg=="
         priority
       />
       <div

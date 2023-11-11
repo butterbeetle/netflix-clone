@@ -28,8 +28,12 @@ export type ModalContent = Pick<
 >;
 
 export type ModalContentInfo = Pick<
-  Content,
+  ModalContent,
   "title" | "overview" | "genre_ids"
+>;
+export type BannerContent = Pick<
+  ModalContent,
+  "title" | "overview" | "backdrop_path"
 >;
 
 export type ModalContentVideo = {
