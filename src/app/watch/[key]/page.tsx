@@ -15,6 +15,7 @@ import { formatTime } from "@/util/converter";
 import GoBackIcon from "@/components/ui/icons/GoBackIcon";
 import { makeYoutubeURL } from "@/service/tmdb";
 import { useParams } from "next/navigation";
+import Spinner from "@/components/ui/Spinner";
 // const ReactPlayer = dynamic(() => import("react-player"), {
 //   ssr: false,
 // });
@@ -34,6 +35,9 @@ export default function VideoPage() {
     buffer: true,
     fullScreen: false,
   });
+
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const { playing, muted, volume, played, seeking, buffer, fullScreen } =
     videoState;
@@ -101,6 +105,17 @@ export default function VideoPage() {
       handle={fullScreenhandle}
       onChange={() => fullScreenHandler()}
     >
+      {!videoReady && (
+        <div className="absolute w-full h-full text-white z-50 flex flex-col gap-3 items-center justify-center bg-black/90">
+          {!videoError && (
+            <>
+              <Spinner color={"white"} size={100} />
+              <span>유튜브 영상을 가져오고 있습니다...!</span>
+            </>
+          )}
+          {videoError && <span>유튜브 영상이 존재하지 않습니다...!</span>}
+        </div>
+      )}
       <div className="w-full h-full flex justify-center items-center flex-col bg-black">
         <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl ">
           <div className="w-fit cursor-pointer">
@@ -123,6 +138,8 @@ export default function VideoPage() {
               muted={muted}
               volume={volume}
               loop={false}
+              onError={() => setVideoError(true)}
+              onReady={() => setVideoReady(true)}
               onEnded={() => playPauseHandler(false)}
               onPlay={() => playPauseHandler(true)}
               onPause={() => playPauseHandler(false)}
