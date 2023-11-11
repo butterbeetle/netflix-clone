@@ -32,8 +32,8 @@ export default function PreviewModal({
   const videoKey = videoData?.[0]?.key;
   return (
     <div
-      className="fixed top-[2em] min-w-[456px] w-[90%] md:min-w-[750px] md:max-w-[890px] rounded-md
-    will-change-transform mb-8 shadow-md translate-x-0 
+      className="absolute top-[2em] min-w-[456px] w-[90%] md:min-w-[750px] md:max-w-[890px] rounded-md
+    will-change-transform mb-8 shadow-md 
     "
     >
       <button

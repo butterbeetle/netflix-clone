@@ -88,7 +88,7 @@ export default function Modal({ id }: Props) {
       )}
       {!loading && (
         <div
-          className="absolute top-0 left-0 flex justify-center w-full h-full z-50
+          className="fixed top-0 left-0 flex justify-center w-full h-full z-50
            bg-black/70 box-border will-change-scroll overflow-y-scroll"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
