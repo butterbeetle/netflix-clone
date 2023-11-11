@@ -22,9 +22,8 @@ import { useParams } from "next/navigation";
 export default function VideoPage() {
   const videoRef = useRef<ReactPlayer>(null);
   const progressRef = useRef<HTMLInputElement>(null);
-  const params = useParams();
+  const { key } = useParams() as { key: string };
 
-  console.log("params", params);
   const [mount, setMount] = useState(false);
   const [videoState, setVideoState] = useState({
     playing: true,
@@ -116,7 +115,7 @@ export default function VideoPage() {
           {mount && (
             <ReactPlayer
               ref={videoRef}
-              url={"https://www.youtube.com/watch?v=m7Hthc3bYsc"}
+              url={makeYoutubeURL(key)}
               width="100%"
               height="100%"
               controls={false}
