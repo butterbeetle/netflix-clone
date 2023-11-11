@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import reactDom from "react-dom";
 type Props = {
   children: React.ReactNode;
 };
 export default function ModalPortal({ children }: Props) {
-  if (typeof window === "undefined") {
-    return null;
-  }
+  const [element, setElement] = useState<HTMLElement | null>(null);
 
-  const node = document.getElementById("portal") as Element;
+  useEffect(() => {
+    setElement(document.getElementById("portal"));
+  }, [element]);
 
-  return reactDom.createPortal(children, node);
+  if (element) return reactDom.createPortal(children, element);
+
+  return null;
 }

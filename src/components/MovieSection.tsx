@@ -6,6 +6,8 @@ import Modal from "./ui/Modal";
 import ModalPortal from "./ui/ModalPortal";
 const movieList = [
   { title: "높은 평점 영화", type: "movie", category: "top_rated" },
+  { title: "높은 평점 영화", type: "movie", category: "top_rated" },
+  { title: "높은 평점 영화", type: "movie", category: "top_rated" },
   // { title: "현재 상영 영화", type: "movie", category: "now_playing" },
   // { title: "액션 영화",       type: "discover", category: "movie", genres: "28" },
   // { title: "코미디 영화",     type: "discover", category: "movie", genres: "35" },
