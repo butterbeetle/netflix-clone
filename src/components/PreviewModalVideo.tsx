@@ -24,7 +24,7 @@ export default function PreviewModalVideo({ videoKey, videoData }: Props) {
   };
 
   return (
-    <div className="relative w-full aspect-video rounded-t-md  cursor-pointer">
+    <div className="relative w-full aspect-video rounded-t-md cursor-pointer">
       <div
         className="absolute w-full h-full
         bg-gradient-to-t from-[#181818] to-[#181818]/10 to-50%
@@ -33,12 +33,12 @@ export default function PreviewModalVideo({ videoKey, videoData }: Props) {
         <div className="relative w-full">
           <div className="absolute bottom-8 flex justify-between w-full">
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-white rounded-sm flex items-center hover:bg-white/80 transition gap-1">
-                <div className="inline-block ">
+              <div className="py-1 px-2 bg-white rounded-sm flex items-center justify-center hover:bg-white/80 transition gap-1">
+                <div>
                   <PlayIcon size={15} />
                 </div>
                 <div onClick={() => linkHandler()}>
-                  <p className="inline-block text-[10px]">재생</p>
+                  <p className="text-sm">재생</p>
                 </div>
               </div>
               <div
