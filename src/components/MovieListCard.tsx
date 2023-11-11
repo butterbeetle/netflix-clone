@@ -84,17 +84,19 @@ group-hover:-translate-y-12
               </div> */}
               <div>
                 <div className="flex gap-1">
-                  <p className="text-white text-[10px]">{title || name}</p>
-                  <p className="text-white text-[10px]">
+                  <p className="text-white text-[10px] md:text-[12px] lg:text-sm">
+                    {title || name}
+                  </p>
+                  <p className="text-white text-[10px] md:text-[12px] lg:text-sm">
                     ⭐{vote_average.toFixed(1)}
                   </p>
                 </div>
-                <p className="text-[#46D369] text-[10px]">
+                <p className="text-[#46D369] text-[10px] md:text-[12px] lg:text-sm">
                   {release_date || first_air_date}
                 </p>
               </div>
               <div className="flex flex-row items-center">
-                <div className="text-white text-[10px]">
+                <div className="text-white text-[10px] md:text-[12px] lg:text-sm">
                   {genreConversionToString(genre_ids).map((genre, index) => (
                     <p className="inline-block" key={index}>{`${
                       index === 0 ? genre : "•" + genre
