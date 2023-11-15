@@ -43,12 +43,12 @@ export default function Banner() {
             blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBAB  bWyZJf74GZgAAAABJRU5ErkJggg=="
             priority
           />
-          <div className="absolute bottom-[15vw] lg:bottom-[20vw] ml-6 md:ml-12 z-[1]">
+          <div className="absolute w-full top-[10vw] ml-6 md:ml-12 z-[1]">
             <p
               className="
             text-white 
-            text-base md:text-6xl 
-            h-full w-[50%] lg:w-[70%]
+            text-[4vw]
+            h-full w-[70%]
             font-bold 
             drop-shadow-xl
             "
@@ -57,25 +57,26 @@ export default function Banner() {
             </p>
             <p
               className="
-            text-white
-            text-base lg:text-2xl
+            text-[#e5e5e5]
+            text-[1.5vw]
             mt-3
             w-[50%] 
             drop-shadow-xl
-            line-clamp-3 lg:line-clamp-5
+            line-clamp-3 md:line-clamp-5 lg:line-clamp-6
             "
             >
               {movie!.overview}
             </p>
-            <div
-              className="flex flex-row items-center mt-3 md:mt-4 gap-3 
+          </div>
+          <div
+            className="absolute bottom-[15vw] lg:bottom-[20vw] flex flex-row items-center ml-6 md:ml-12 gap-3 z-[1] 
                 "
-            >
-              <Link
-                as={`/browse?id=${movie!.id}`}
-                href={`/browse/${movie!.id}`}
-                scroll={false}
-                className="
+          >
+            <Link
+              as={`/browse?id=${movie!.id}`}
+              href={`/browse/${movie!.id}`}
+              scroll={false}
+              className="
                 bg-white/30
                 hover:bg-red-500
                 text-white
@@ -88,16 +89,15 @@ export default function Banner() {
                 items-center
                 transition
               "
-              >
-                <InfoCircleIcon className="mr-1" />
-                <p
-                  className="
+            >
+              <InfoCircleIcon className="mr-1" />
+              <p
+                className="
                 text-sm"
-                >
-                  상세 정보
-                </p>
-              </Link>
-            </div>
+              >
+                상세 정보
+              </p>
+            </Link>
           </div>
         </div>
       )}
