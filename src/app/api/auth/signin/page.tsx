@@ -74,21 +74,21 @@ export default function AuthPage() {
               {variant === "register" && (
                 <Input
                   id="name"
-                  label="Name"
+                  label="이름"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 />
               )}
               <Input
                 id="email"
-                label="Email"
+                label="이메일 주소"
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 value={email}
               />
               <Input
                 id="password"
-                label="Password"
+                label="비밀번호"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 value={password}
