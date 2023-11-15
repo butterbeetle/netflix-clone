@@ -9,8 +9,11 @@ import fetcher from "@/lib/fetcher";
 
 import "swiper/css";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import MovieListCard from "./MovieListCard";
+
+import { type Swiper as SwiperRef } from "swiper";
+import { isNaN } from "lodash";
 
 interface Props {
   title: string;
@@ -19,7 +22,10 @@ interface Props {
   genres?: string | null;
 }
 export default function MovieList({ title, type, category, genres }: Props) {
-  const swiperRef = useRef<any | null>(null);
+  const swiperRef = useRef<SwiperRef>();
+  const { current } = swiperRef;
+
+  const [index, setIndex] = useState(0);
 
   const { data: movies } = useSWR<Content[]>(
     `/api/tmdb/${type}/${category}/${genres ?? null}`,
@@ -42,7 +48,9 @@ export default function MovieList({ title, type, category, genres }: Props) {
           </div>
           <div className="group/visible w-full flex justify-center">
             <button
-              onClick={() => swiperRef.current.swiper.slidePrev()}
+              onClick={() => {
+                current!.slidePrev();
+              }}
               className="w-[4%] bg-black/50 z-[2] m-0 opacity-0 transition-all duration-500
               group-hover/visible:opacity-100
         group/chevron
@@ -60,11 +68,12 @@ export default function MovieList({ title, type, category, genres }: Props) {
               </div>
             </button>
             <Swiper
-              ref={swiperRef}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
               modules={[Pagination]}
               className="relative w-[92%] flex transition peer"
               lazyPreloadPrevNext={6}
-              loop={true}
               slidesPerView={3}
               slidesPerGroup={3}
               speed={1000}
@@ -75,8 +84,13 @@ export default function MovieList({ title, type, category, genres }: Props) {
                 1400: { slidesPerView: 6, slidesPerGroup: 6 },
               }}
               pagination={{
-                clickable: true,
+                clickable: false,
               }}
+              observer
+              observeParents
+              parallax
+              draggable={false}
+              touchRatio={0}
               slideVisibleClass="swiper-visible"
             >
               {movies?.map(
@@ -108,7 +122,9 @@ export default function MovieList({ title, type, category, genres }: Props) {
               )}
             </Swiper>
             <button
-              onClick={() => swiperRef.current.swiper.slideNext()}
+              onClick={() => {
+                current!.slideNext();
+              }}
               className="w-[4%] bg-black/50 z-[2] m-0 opacity-0 transition-all duration-500
               group-hover/visible:opacity-100
         group/chevron
