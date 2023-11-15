@@ -142,8 +142,10 @@ export default function AuthPage() {
             </p>
             <ul className="text-sm flex flex-wrap w-full">
               {footerMenu.map(({ title }) => (
-                <li className="w-1/3 md:w-1/4 mb-4" key={title}>
-                  {title}
+                <li className="w-1/3 md:w-1/4 mb-4 " key={title}>
+                  <p className="w-fit cursor-pointer hover:underline">
+                    {title}
+                  </p>
                 </li>
               ))}
             </ul>
