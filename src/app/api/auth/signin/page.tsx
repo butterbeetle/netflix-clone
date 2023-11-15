@@ -7,6 +7,16 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@/components/ui/icons/GoogleIcon";
 import GithubIcon from "@/components/ui/icons/GithubIcon";
+import FooterInfo from "@/components/ui/FooterInfo";
+
+const footerMenu = [
+  { title: "자주 묻는 질문" },
+  { title: "고객 센터" },
+  { title: "이용 약관" },
+  { title: "개인정보 처리방침" },
+  { title: "쿠키 설정" },
+  { title: "회사 정보" },
+];
 
 export default function AuthPage() {
   const [name, setName] = useState("");
@@ -48,18 +58,18 @@ export default function AuthPage() {
 
   return (
     <div
-      className="relative h-full w-full bg-[url('/images/hero.jpg')] 
-    bg-no-repeat bg-center bg-fixed bg-cover select-none"
+      className="relative w-full h-screen bg-[url('/images/hero.jpg')] 
+    bg-no-repeat  bg-fixed bg-cover select-none"
     >
-      <div className="bg-black w-full h-full lg:bg-opacity-50">
+      <div className="bg-black w-full h-full md:bg-opacity-50">
         <nav className="px-12 py-5">
           <Image src="/images/logo.png" alt="Logo" width={150} height={150} />
         </nav>
-        <div className="flex justify-center">
-          <div className="bg-black/70 p-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
-            <h2 className="text-white text-4xl mb-8 font-semibold">
-              {variant === "login" ? "Sign in" : "Register"}
-            </h2>
+        <div className="flex justify-center mb-0 md:mb-44 border-b border-b-[#737373] md:border-0">
+          <div className="bg-black/80 min-h-[550px] md:min-h-[660px] p-16 self-center mt-2 lg:w-2/5 md:max-w-md rounded-md w-full">
+            <h1 className="text-white text-3xl mb-8 font-semibold">
+              {variant === "login" ? "로그인" : "회원가입"}
+            </h1>
             <div className="flex flex-col gap-4">
               {variant === "register" && (
                 <Input
@@ -88,7 +98,7 @@ export default function AuthPage() {
               onClick={variant === "login" ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
             >
-              {variant === "login" ? "Login" : "Sign up"}
+              {variant === "login" ? "로그인" : "회원가입"}
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
@@ -124,6 +134,19 @@ export default function AuthPage() {
               </span>
             </p>
           </div>
+        </div>
+        <div className="relative  bg-black md:bg-opacity-50 text-[#737373] p-8">
+          <p className="mb-8 ">
+            질문이 있으신가요? 문의 전화: 00-308-321-0161 (수신자 부담)
+          </p>
+          <ul className="text-sm flex flex-wrap w-full">
+            {footerMenu.map(({ title }) => (
+              <li className="w-1/3 mb-4" key={title}>
+                {title}
+              </li>
+            ))}
+          </ul>
+          <FooterInfo />
         </div>
       </div>
     </div>
