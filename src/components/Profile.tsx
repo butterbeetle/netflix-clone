@@ -13,12 +13,14 @@ export default function Profile({ name }: Props) {
   return (
     <div
       onClick={() => router.push("/")}
-      className="group flex-row w-44 mx-auto"
+      className="group flex flex-col mx-auto justify-center items-center"
     >
       <div
         className="
-      w-44
-      h-44
+        w-[10vw]
+      min-w-[80px] max-w-[200px]
+      min-h-[80px] max-h-[200px]
+      aspect-square
       rounded-md
       flex
       items-center justify-center
@@ -30,16 +32,15 @@ export default function Profile({ name }: Props) {
     "
       >
         <Image
-          className="w-fit h-fit"
+          className="object-cover w-full"
           src={"/images/default-blue.png"}
           alt="Profile"
-          sizes="100vw"
           priority
-          width={0}
-          height={0}
+          width={150}
+          height={150}
         />
       </div>
-      <div className="mt-4 text-gray-400 text-2xl text-center text-ellipsis whitespace-nowrap overflow-hidden group-hover:text-white">
+      <div className="md:text-[1.5vw] text-gray-400 text-center text-ellipsis whitespace-nowrap overflow-hidden group-hover:text-white">
         {name}
       </div>
     </div>
