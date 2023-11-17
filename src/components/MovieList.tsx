@@ -37,6 +37,7 @@ export default function MovieList({ title, type, category, genres }: Props) {
     }
   );
 
+  // console.log("section", type, category, genres);
   return (
     <div className=" mb-8">
       {true ? (

@@ -1,22 +1,20 @@
 import { Content } from "@/model/Content";
 import { tmdbBaseURL } from "./tmdb";
 
-type Props = {
-  type: string;
+type DiscoverProps = {
   category: string;
-  option?: string | number;
+  genre: string;
 };
 
 /**
  * GET api.themoviedb.org/3/discover/${category} data
  * @see https://developer.themoviedb.org/reference/discover-movie
- * @param type - "discover"
  * @param category "movie" | "tv"
- * @param option genre
+ * @param genre genre
  * @returns discover data
  */
-export async function getDiscoverOf({ type, category, option }: Props) {
-  const url = `${tmdbBaseURL}/${type}/${category}?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc&with_genres=${option}`;
+export async function getDiscoverOf({ category, genre }: DiscoverProps) {
+  const url = `${tmdbBaseURL}/discover/${category}?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc&with_genres=${genre}`;
 
   const options = {
     method: "GET",
