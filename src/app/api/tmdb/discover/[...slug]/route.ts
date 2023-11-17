@@ -22,7 +22,7 @@ export async function GET(_: NextRequest, context: Context) {
   }
 
   const [category, genre] = slug;
-  console.log(`type:${category} genre:${genre}`);
+  // console.log(`type:${category} genre:${genre}`);
 
   return getDiscoverOf({ category, genre }) //
     .then((res) => NextResponse.json(res))
