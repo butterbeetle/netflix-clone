@@ -12,16 +12,17 @@ import Spinner from "./ui/Spinner";
 
 type Props = {
   id: string;
+  title: string;
   videoKey: string;
 };
 
-export default function PreviewModalVideo({ id, videoKey }: Props) {
+export default function PreviewModalVideo({ id, title, videoKey }: Props) {
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
   const router = useRouter();
 
   const linkHandler = () => {
-    router.push(`/watch?id=${id}&key=${videoKey}`);
+    router.push(`/watch?id=${id}&key=${videoKey}&title=${title}`);
     // console.log("push");
   };
 
