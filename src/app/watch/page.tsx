@@ -112,7 +112,7 @@ export default function WatchPage() {
     setVideoState({ ...videoState, seeking: true });
   };
 
-  console.log(isLoading, videoData);
+  console.log(videoData);
   return (
     <FullScreen
       className="relative w-screen h-screen "
@@ -244,10 +244,15 @@ export default function WatchPage() {
                 </div>
               </div>
             </div>
-            <div className="text-base md:text-xl flex items-center">
-              {videoData?.map((data) => {
-                if (data.key === key) return data.name;
-              })}
+            <div
+              className="text-base md:text-xl flex items-center 
+            max-w-[500px] "
+            >
+              <p className="text-ellipsis whitespace-nowrap overflow-hidden">
+                {videoData?.map((data) => {
+                  if (data.key === key) return data.name;
+                })}
+              </p>
             </div>
             <div className="flex gap-3">
               {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
