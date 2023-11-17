@@ -11,17 +11,17 @@ import { useRouter } from "next/navigation";
 import Spinner from "./ui/Spinner";
 
 type Props = {
-  videoData: ModalContentVideo[];
+  id: string;
   videoKey: string;
 };
 
-export default function PreviewModalVideo({ videoKey, videoData }: Props) {
+export default function PreviewModalVideo({ id, videoKey }: Props) {
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
   const router = useRouter();
 
   const linkHandler = () => {
-    router.push(`/watch/${videoKey}`);
+    router.push(`/watch?id=${id}&key=${videoKey}`);
     // console.log("push");
   };
 

@@ -98,6 +98,7 @@ export default function Modal({ id }: Props) {
         {!loading && (
           <PreviewModal
             onClose={() => closeHandler()}
+            id={id}
             videoData={videoData!}
             detailData={detailData!}
             actorData={actorData!}

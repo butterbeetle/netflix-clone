@@ -14,16 +14,30 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { formatTime } from "@/util/converter";
 import GoBackIcon from "@/components/ui/icons/GoBackIcon";
 import { makeYoutubeURL } from "@/service/tmdb";
-import { useParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Spinner from "@/components/ui/Spinner";
-// const ReactPlayer = dynamic(() => import("react-player"), {
-//   ssr: false,
-// });
+import useSWR from "swr";
+import { ModalContentVideo } from "@/model/Content";
+import fetcher from "@/lib/fetcher";
 
-export default function VideoPage() {
+export default function WatchPage() {
   const videoRef = useRef<ReactPlayer>(null);
   const progressRef = useRef<HTMLInputElement>(null);
-  const { key } = useParams() as { key: string };
+  const router = useRouter();
+  const params = useSearchParams();
+
+  const id = params.get("id");
+  const key = params.get("key") as string;
+
+  const { data: videoData, isLoading } = useSWR<ModalContentVideo[]>(
+    `/api/tmdb/movie/${id}/videos`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
   const [mount, setMount] = useState(false);
   const [videoState, setVideoState] = useState({
@@ -39,8 +53,7 @@ export default function VideoPage() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
-  const { playing, muted, volume, played, seeking, buffer, fullScreen } =
-    videoState;
+  const { playing, muted, volume, played, seeking, fullScreen } = videoState;
 
   const currentTime = videoRef.current
     ? videoRef.current.getCurrentTime()
@@ -99,13 +112,14 @@ export default function VideoPage() {
     setVideoState({ ...videoState, seeking: true });
   };
 
+  console.log(isLoading, videoData);
   return (
     <FullScreen
       className="relative w-screen h-screen "
       handle={fullScreenhandle}
       onChange={() => fullScreenHandler()}
     >
-      {!videoReady && (
+      {!videoReady && isLoading && (
         <div className="absolute w-full h-full text-white z-50 flex flex-col gap-3 items-center justify-center bg-black/90">
           {!videoError && (
             <>
@@ -118,9 +132,9 @@ export default function VideoPage() {
       )}
       <div className="w-full h-full flex justify-center items-center flex-col bg-black">
         <div className="absolute top-0 w-full text-white z-[3] px-2 pt-2 text-3xl ">
-          <div className="w-fit cursor-pointer">
+          <button onClick={() => router.back()} className="w-fit ">
             <GoBackIcon />
-          </div>
+          </button>
         </div>
         <div
           onClick={() => playPauseHandler()}
@@ -131,6 +145,7 @@ export default function VideoPage() {
             <ReactPlayer
               ref={videoRef}
               url={makeYoutubeURL(key)}
+              // url={`https://www.youtube.com/watch?v=sN9vafGli18`}
               width="100%"
               height="100%"
               controls={false}
@@ -229,7 +244,11 @@ export default function VideoPage() {
                 </div>
               </div>
             </div>
-            <div className="text-base md:text-xl flex items-center">Title</div>
+            <div className="text-base md:text-xl flex items-center">
+              {videoData?.map((data) => {
+                if (data.key === key) return data.name;
+              })}
+            </div>
             <div className="flex gap-3">
               {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <PlayerSkipForwardIcon />

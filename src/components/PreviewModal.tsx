@@ -13,6 +13,7 @@ import PreviewModalCast from "./PreviewModalCast";
 import PreviewModalRelated from "./PreviewModalRelated";
 
 type Props = {
+  id: string;
   onClose: () => void;
   videoData: ModalContentVideo[];
   detailData: DetailContent;
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export default function PreviewModal({
+  id,
   onClose,
   videoData,
   detailData,
@@ -45,7 +47,7 @@ export default function PreviewModal({
         <CloseIcon />
       </button>
       {videoKey != undefined ? (
-        <PreviewModalVideo videoData={videoData} videoKey={videoKey} />
+        <PreviewModalVideo id={id} videoKey={videoKey} />
       ) : (
         <PreviewModalImage imgPath={detailData.backdrop_path} />
       )}
