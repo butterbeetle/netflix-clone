@@ -22,7 +22,7 @@ export default function PreviewModalVideo({ videoKey, videoData }: Props) {
 
   const linkHandler = () => {
     router.push(`/watch/${videoKey}`);
-    console.log("push");
+    // console.log("push");
   };
 
   return (
