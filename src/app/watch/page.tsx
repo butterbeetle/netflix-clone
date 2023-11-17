@@ -112,7 +112,9 @@ export default function WatchPage() {
     setVideoState({ ...videoState, seeking: true });
   };
 
-  console.log(videoData);
+  // console.log(videoData);
+  // console.log(Math.ceil(Number(played.toFixed(2)) * 10));
+
   return (
     <FullScreen
       className="relative w-screen h-screen "
@@ -173,7 +175,7 @@ export default function WatchPage() {
               type="range"
               min={0}
               max={100}
-              value={played * 100}
+              value={Math.ceil(Number(played.toFixed(2)) * 10) * 10}
               onChange={onSeekHandler}
               onClick={onSeekMouseUpHandler}
               onMouseDown={onSeekMouseDownHandler}
@@ -254,13 +256,16 @@ export default function WatchPage() {
                 })}
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="relative flex items-center gap-3">
               {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <PlayerSkipForwardIcon />
-              </div>
+              </div> */}
               <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <SquareStackIcon />
-              </div> */}
+              </div>
+              <div className="absolute bottom-0 -left-1/2 -translate-x-1/2 -translate-y-1/2 border border-red-300">
+                히히카드 전설카드 에픽카드 히히카드
+              </div>
               <div
                 onClick={
                   fullScreen ? fullScreenhandle.enter : fullScreenhandle.exit
