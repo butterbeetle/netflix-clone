@@ -269,68 +269,74 @@ export default function WatchPage() {
               {/* <div className="cursor-pointer hover:scale-[1.2] transition-all">
                 <PlayerSkipForwardIcon />
               </div> */}
-              <div className="cursor-pointer hover:scale-[1.2] transition-all">
-                <SquareStackIcon />
-              </div>
-              <div
-                className="absolute bg-[#262626] border  border-red-900 z-[3]
+              <div className="cursor-pointer  transition-all group">
+                <div className="group-hover:scale-[1.2]">
+                  <SquareStackIcon />
+                </div>
+                <div
+                  className="absolute bg-[#262626] border  border-red-900 z-[3]
           min-w-[400px] md:min-w-[600px] lg:min-w-[700px]
           min-h-[360px] md:min-h-[450px] lg:min-h-[600px] xl:min-h-[680px]
-          right-0 bottom-10"
-              >
-                <div className="p-2 text-base md:text-lg lg:text-2xl xl:text-3xl">
-                  {mainTitle}
-                </div>
-                <ul
-                  className="text-[11px] md:text-[13px] lg:text-[21px] 
+          -right-2 bottom-10 
+          hidden
+          opacity-0
+          group-hover:block
+          group-hover:opacity-100"
+                >
+                  <div className="p-2 text-base md:text-lg lg:text-2xl xl:text-3xl">
+                    {mainTitle}
+                  </div>
+                  <ul
+                    className="text-[11px] md:text-[13px] lg:text-[21px] 
           max-h-[320px] md:max-h-[410px] lg:max-h-[560px] xl:max-h-[640px]
                 overflow-y-auto"
-                >
-                  {videoData?.map(({ key, name }, num) => (
-                    <li
-                      key={key}
-                      onClick={() => videoKeyHandler(key)}
-                      className={`p-4 md:p-6 lg:p-8 group
+                  >
+                    {videoData?.map(({ key, name }, num) => (
+                      <li
+                        key={key}
+                        onClick={() => videoKeyHandler(key)}
+                        className={`p-4 md:p-6 lg:p-8 group
                       ${key === curVideoKey ? "bg-black/50" : ""}
                       ${
                         key !== curVideoKey &&
                         "hover:bg-white/10 cursor-pointer "
                       }
                       `}
-                    >
-                      <div className="flex gap-3 leading-3">
-                        <p>{num + 1}</p>
-                        <p>{name}</p>
-                      </div>
-                      {key === curVideoKey && (
-                        <div className="relative flex justify-center mt-3 md:mt-4 lg:mt-5 ">
-                          <div
-                            className="absolute aspect-video w-[25vw]
+                      >
+                        <div className="flex gap-3 leading-3">
+                          <p>{num + 1}</p>
+                          <p>{name}</p>
+                        </div>
+                        {key === curVideoKey && (
+                          <div className="relative flex justify-center mt-3 md:mt-4 lg:mt-5 ">
+                            <div
+                              className="absolute aspect-video w-[25vw]
                           flex justify-center items-center opacity-50
                           group-hover:opacity-100 transition
                           group-hover:scale-105"
-                          >
-                            <div className="rounded-full bg-black/50 text-[8vw] cursor-pointer">
-                              <PlayIcon />
+                            >
+                              <div className="rounded-full bg-black/50 text-[8vw] cursor-pointer">
+                                <PlayIcon />
+                              </div>
                             </div>
+                            <Image
+                              className="aspect-video w-[25vw]"
+                              src={
+                                makeYoutubeThumbnailIURL(key) ??
+                                `http://via.placeholder.com/300/FFF000/?text=Thumbnail`
+                              }
+                              placeholder="blur"
+                              blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBAB  bWyZJf74GZgAAAABJRU5ErkJggg=="
+                              alt=""
+                              width={130}
+                              height={130}
+                            />
                           </div>
-                          <Image
-                            className="aspect-video w-[25vw]"
-                            src={
-                              makeYoutubeThumbnailIURL(key) ??
-                              `http://via.placeholder.com/300/FFF000/?text=Thumbnail`
-                            }
-                            placeholder="blur"
-                            blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBAB  bWyZJf74GZgAAAABJRU5ErkJggg=="
-                            alt=""
-                            width={130}
-                            height={130}
-                          />
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <div
                 onClick={
