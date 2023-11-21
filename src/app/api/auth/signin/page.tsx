@@ -73,9 +73,16 @@ export default function AuthPage() {
       });
       login();
     } catch (error) {
-      console.log("Register Error", error);
+      if (axios.isAxiosError(error)) {
+        router.push(
+          `${pathname}?${createQueryString(
+            "error",
+            error.response?.data as string
+          )}`
+        );
+      }
     }
-  }, [email, name, password, login]);
+  }, [email, name, password, login, router, createQueryString, pathname]);
 
   useEffect(() => {
     const errorHandler = () => {

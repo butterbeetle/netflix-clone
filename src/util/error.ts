@@ -2,6 +2,7 @@ export enum AuthErrorList {
   REQUIRED_ERROR = "REQUIRED_ERROR",
   INCORRECT_PASSWORD_ERROR = "INCORRECT_PASSWORD_ERROR",
   EMAIL_NOT_EXISTS_ERROR = "EMAIL_NOT_EXISTS_ERROR",
+  EMAIL_TAKEN_ERROR = "EMAIL_TAKEN_ERROR",
 }
 
 export class ErrorBase<T extends string> extends Error {
@@ -37,5 +38,7 @@ export const AuthErrorString = (type: string) => {
       return "비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요.";
     case AuthErrorList.EMAIL_NOT_EXISTS_ERROR:
       return "죄송합니다. 이 이메일 주소를 사용하는 계정을 찾을 수 없습니다.";
+    case AuthErrorList.EMAIL_TAKEN_ERROR:
+      return "이미 가입된 이메일 주소입니다.";
   }
 };
