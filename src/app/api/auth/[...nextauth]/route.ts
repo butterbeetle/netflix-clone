@@ -7,6 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../../lib/prismadb";
 import { compare } from "bcrypt";
+import { AuthErrorList } from "@/util/error";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -33,7 +34,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password required");
+          throw new Error(AuthErrorList.REQUIRED_ERROR);
         }
 
         const user = await prisma.user.findUnique({
@@ -43,7 +44,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user.hashedPassword) {
-          throw new Error("Email does not exist");
+          throw new Error(AuthErrorList.EMAIL_NOT_EXISTS_ERROR);
         }
 
         const isCorrectPassword = await compare(
@@ -52,9 +53,8 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Incorrect password");
+          throw new Error(AuthErrorList.INCORRECT_PASSWORD_ERROR);
         }
-
         return user;
       },
     }),
@@ -69,6 +69,9 @@ export const authOptions: NextAuthOptions = {
       //     name: profile?.name,
       //   });
       // }
+      console.log("User:", user);
+      console.log("Account:", account);
+      console.log("Profile:", profile);
       return true;
     },
     async session({ session }) {

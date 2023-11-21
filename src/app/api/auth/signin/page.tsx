@@ -2,12 +2,14 @@
 
 import Input from "@/components/Input";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import GoogleIcon from "@/components/ui/icons/GoogleIcon";
 import GithubIcon from "@/components/ui/icons/GithubIcon";
 import FooterInfo from "@/components/ui/FooterInfo";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { AuthErrorString } from "@/util/error";
 
 const footerMenu = [
   { title: "자주 묻는 질문" },
@@ -19,11 +21,17 @@ const footerMenu = [
 ];
 
 export default function AuthPage() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("login");
+
+  const [error, setError] = useState<null | string>(null);
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -31,17 +39,30 @@ export default function AuthPage() {
     );
   }, []);
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const login = useCallback(async () => {
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/profiles",
-      });
-    } catch (error) {
-      console.log("Login Error", error);
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: "/profiles",
+    });
+    if (res?.error === null) router.push(res.url as string);
+    else {
+      router.push(
+        `${pathname}?${createQueryString("error", res?.error as string)}`
+      );
     }
-  }, [email, password]);
+  }, [email, password, router, pathname, createQueryString]);
 
   const register = useCallback(async () => {
     try {
@@ -56,6 +77,16 @@ export default function AuthPage() {
     }
   }, [email, name, password, login]);
 
+  useEffect(() => {
+    const errorHandler = () => {
+      const error = searchParams.get("error");
+      if (error !== null) {
+        setError(error);
+      }
+    };
+    errorHandler();
+  }, [error, searchParams]);
+
   return (
     <div
       className="relative w-full h-screen md:h-full bg-[url('/images/hero.jpg')] 
@@ -66,11 +97,22 @@ export default function AuthPage() {
           <Image src="/images/logo.png" alt="Logo" width={150} height={150} />
         </nav>
         <main className="flex justify-center mb-0 md:mb-44 border-b border-b-[#737373] md:border-0">
-          <div className="bg-black/80 min-h-[550px] md:min-h-[660px] p-16 self-center mt-2 lg:w-2/5 md:max-w-md rounded-md w-full">
+          <div
+            className="bg-black/80 min-h-[550px] md:min-h-[660px] p-16 self-center 
+          mt-2 lg:w-2/5 md:max-w-md rounded-md w-full"
+          >
             <h1 className="text-white text-3xl mb-8 font-semibold">
               {variant === "login" ? "로그인" : "회원가입"}
             </h1>
             <div className="flex flex-col gap-4">
+              {error && (
+                <div
+                  className="bg-[#e87c03] rounded-md text-white text-sm
+                w-full py-[10px] px-[20px]"
+                >
+                  {AuthErrorString(error)}
+                </div>
+              )}
               {variant === "register" && (
                 <Input
                   id="name"
